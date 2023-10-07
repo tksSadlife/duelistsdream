@@ -8,14 +8,12 @@
                 <h3> Health </h3>
                 <div class="vitality">
                     <input name="attr_current_health" type="text" value="450" />
-                    <p> / </p>
                     <span name="attr_max_health"></span>
                     <button class="add_max_button" name="act_add_max_health" type="action"> +150 </button>
                 </div>
                 <h3> Mana </h3>
                 <div class="vitality">
                     <input name="attr_current_mana" type="text" value="5" />
-                    <p> / </p>
                     <span name="attr_max_mana"></span>
                     <button class="add_max_button" name="act_add_max_mana" type="action"> +1 </button>
                 </div>
@@ -60,7 +58,7 @@
         <div class="top_right">
             <div class="level_field">
                 <div class="xp">
-                    <input />
+                    <input name="attr_xp" type="number" value="0" />
                     <button> Buy XP </button>
                 </div>
                 <span class="level" name="attr_level"></span>
@@ -531,15 +529,10 @@
                     "s1", "s2", "s3"];
     names.forEach(name => {
         on(`change:${name}`, (e) => {
-            getAttrs([name, `${name}_level`], values => {
+            getAttrs([name, `${name}_level`, "talent_points"], values => {
                 const name_base = values[name];
-                let name_rank = 0;
-                if (data.talents.rank1talents.includes(name_base)) name_rank = "1";
-                if (data.talents.rank2talents.includes(name_base)) name_rank = "2";
-                if (data.talents.rank3talents.includes(name_base)) name_rank = "3";
-                if (data.talents.rank4talents.includes(name_base)) name_rank = "4";
-                if (data.talents.rank5talents.includes(name_base)) name_rank = "5";
-                
+                const name_rank = get_rank(name_base);
+
                 setAttrs({
                     [`${name}_rank`]: name_rank,
                 });
@@ -547,6 +540,15 @@
                 if (e.previousValue === e.newValue) {
                     setAttrs({
                         [`${name}_level`]: 0,
+                    });
+                } else {
+                    const prev_name_rank = get_rank(e.previousValue);
+                    const rank_diff = prev_name_rank - name_rank;
+                    cost = rank_diff * values[`${name}_level`];
+                    const new_tp = int(values["talent_points"]) + cost;
+                    
+                    setAttrs({
+                        talent_points: new_tp
                     });
                 };
             });
@@ -566,6 +568,14 @@
             });
         });
     });
+
+    const get_rank = (talent_name) => {
+        if (data.talents.rank1talents.includes(talent_name)) return 1;
+        if (data.talents.rank2talents.includes(talent_name)) return 2;
+        if (data.talents.rank3talents.includes(talent_name)) return 3;
+        if (data.talents.rank4talents.includes(talent_name)) return 4;
+        if (data.talents.rank5talents.includes(talent_name)) return 5;
+    }
 
     const int = score => parseInt(score, 10) || 0;
     on('clicked:add_max_health clicked:add_max_mana', async(event) => {

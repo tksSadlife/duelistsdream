@@ -1,5 +1,5 @@
 span {
-  background-color: rgb(235, 235, 235);
+  background-color: white;
   padding: 1px;
   text-align: center;
 }
@@ -10,30 +10,35 @@ p {
 }
 
 input {
-  background-color: white;
+  background-color: rgb(235, 235, 235);
   border-radius: 0;
   text-align: center;
 }
 
 .top_row {
+  width: 840px;
 }
 
 .top_left {
+  background-color: pink;
   display: inline-block;
-  width: 30%;
-  margin-right: 4.5%;
+  vertical-align: top;
+  width: 250px;
+  margin-right: 15px;
 }
 
 .top_mid {
+  background-color: yellow;
   display: inline-block;
-  width: 25%;
-  margin-right: 4.5%;
+  vertical-align: top;
+  width: 250px;
+  margin-right: 15px;
 }
 
 .top_right {
-  display: inline-block;
-  width: 35%;
   background-color: pink;
+  display: inline-block;
+  width: 300px;
 }
 
 
@@ -56,36 +61,36 @@ input {
 .vitality {
   border: 1px solid black;
   vertical-align: middle;
-  width: 100%;
-}
-
-.vitality input, .vitality span {
-  width: 35%;
-  height: 100%;
-  border: none;
-  font-size: large;
-  vertical-align: middle;
 }
 
 .vitality input {
-  background-color: white;
+  width: 90px;
   border: none;
+  font-size: large;
+  vertical-align: middle;
+  border-right: 1px solid black;
 }
 
 .vitality span {
+  width: 90px;
+  border: none;
+  font-size: large;
+  vertical-align: middle;
   display: inline-block;
 }
 
 .add_max_button {
-  min-width: 10%;
-  width: 15%;
-  background-color: white;
+  width: 40px;
+  background-color: rgb(235, 235, 235);
   border-radius: 10px;
   border: 1px solid black;
   vertical-align: middle;
 }
 
 /* STATS */
+
+.stats {
+}
 
 .stat {
   border: 1px solid black;
