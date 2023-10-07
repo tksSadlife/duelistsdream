@@ -90,7 +90,7 @@ button {
 
 .add_max_button {
   width: 40px;
-  background-color: rgb(255, 225, 225);
+  background-color: rgb(255, 235, 235);
 }
 
 /* STATS */
@@ -173,7 +173,7 @@ button {
   display: inline-table;
   padding: auto;
   vertical-align: middle;
-  background-color: rgb(255, 225, 225);
+  background-color: rgb(255, 235, 235);
 }
 
 .talents_category {
@@ -233,7 +233,7 @@ button {
   width: 100%;
   border: none;
   font-size: medium;
-  background-color: rgb(225, 255, 225);
+  background-color: rgb(235, 255, 235);
 }
 
 .talent_button {
@@ -282,7 +282,7 @@ input::-webkit-inner-spin-button {
 
 .xp_field button {
   margin-top: 5px;
-  background-color: rgb(225, 255, 225);
+  background-color: rgb(235, 255, 235);
 }
 
 .level {
@@ -328,15 +328,15 @@ input::-webkit-inner-spin-button {
 }
 
 .tp input {
-  background-color: rgb(225, 255, 225);
+  background-color: rgb(235, 255, 235);
 }
 
 .ad input {
-  background-color: rgb(255, 225, 225);
+  background-color: rgb(255, 235, 235);
 }
 
 .sp input {
-  background-color: rgb(225, 225, 255);
+  background-color: rgb(235, 235, 255);
 }
 
 .begin_session {

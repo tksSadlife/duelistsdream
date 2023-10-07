@@ -699,19 +699,6 @@
         });
     };
 
-    const get_taxes = () => {
-        getAttrs(["talent_points"], (values) => {
-            const tp = values["talent_points"];
-            let taxes = 0;
-            if (tp >= 50) taxes = 5;
-            else if (tp >= 40 && tp < 50) taxes = 4;
-            else if (tp >= 30 && tp < 40) taxes = 3;
-            else if (tp >= 20 && tp < 30) taxes = 2;
-            else if (tp >= 10 && tp < 20) taxes = 1;
-            console.log(taxes);
-        });
-    };
-
     on('clicked:add_physical clicked:add_mental clicked:add_social', async(event) => {
         const talent_kind = event.triggerName.substring(12);
         getAttrs([`${talent_kind}`, "adaptive_development"], (values) => {
@@ -729,9 +716,9 @@
     });
 
     on('clicked:buy_xp', async(event) => {
-        getAttrs(["talent_points", "xp"], (values) => {
+        getAttrs(["talent_points", "xp", "level"], (values) => {
             const tp = int(values["talent_points"]);
-            if (tp >= 4) {
+            if (tp >= 4 && values["level"] < 6) {
                 const new_tp = tp - 4;
                 const new_xp = int(values["xp"]) + 4;
                 setAttrs({
@@ -744,7 +731,15 @@
 
     on('clicked:begin_session', async(event) => {
         getAttrs(["talent_points", "xp", "session_number", "level"], (values) => {
-            const new_tp = int(values["talent_points"]) + data.per_session["talent_points"];
+            const tp = values["talent_points"];
+            let taxes = 0;
+            if (tp >= 50) taxes = 5;
+            else if (tp >= 40 && tp < 50) taxes = 4;
+            else if (tp >= 30 && tp < 40) taxes = 3;
+            else if (tp >= 20 && tp < 30) taxes = 2;
+            else if (tp >= 10 && tp < 20) taxes = 1;
+
+            const new_tp = int(values["talent_points"]) + data.per_session["talent_points"] + taxes;
             const new_session_num = int(values["session_number"]) + 1;
             setAttrs({
                 talent_points: new_tp,
