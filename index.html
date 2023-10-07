@@ -86,7 +86,7 @@
             <div class="talent_top">
                 <h2> Physical </h2>
                 <div class="talent_percent">
-                    <button class="talent_rolling" name="act_roll_physical" type="action"><span name="attr_physical"></span><p>%</p></button>
+                    <button class="talent_rolling" name="act_roll_physical" type="roll" value="/me : @{character_name} rolled Physical (@{physical}) \n/r 1d100"><span name="attr_physical"></span><p>%</p></button>
                     <button class="talent_plus" name="act_add_physical" type="action"> +2% </button>
                 </div>
             </div>
@@ -222,7 +222,7 @@
             <div class="talent_top">
                 <h2> Mental </h2>
                 <div class="talent_percent">
-                    <button class="talent_rolling" name="act_roll_mental" type="action"><span name="attr_mental"></span><p>%</p></button>
+                    <button class="talent_rolling" name="act_roll_mental" type="roll" value="/me : @{character_name} rolled Mental (@{mental}) \n/r 1d100"><span name="attr_mental"></span><p>%</p></button>
                     <button class="talent_plus" name="act_add_mental" type="action"> +2% </button>
                 </div>
             </div>
@@ -352,7 +352,7 @@
             <div class="talent_top">
                 <h2> Social </h2>
                 <div class="talent_percent">
-                    <button class="talent_rolling" name="act_roll_social" type="action"><span name="attr_social"></span><p>%</p></button>
+                    <button class="talent_rolling" name="act_roll_social" type="roll" value="/me : @{character_name} rolled Social (@{social}) \n/r 1d100"><span name="attr_social"></span><p>%</p></button>
                     <button class="talent_plus" name="act_add_social" type="action"> +2% </button>
                 </div>
             </div>
@@ -711,6 +711,36 @@
             console.log(taxes);
         });
     };
+
+    on('clicked:add_physical clicked:add_mental clicked:add_social', async(event) => {
+        const talent_kind = event.triggerName.substring(12);
+        getAttrs([`${talent_kind}`, "adaptive_development"], (values) => {
+            if (values["adaptive_development"] > 0) {
+                const tal = int(values[`${talent_kind}`]);
+                const new_tal = tal + 2;
+                const new_ad = int(values["adaptive_development"]) - 1;
+                setAttrs({
+                    [talent_kind]: new_tal,
+                    adaptive_development: new_ad
+                });
+            }
+            
+        });
+    });
+
+    on('clicked:buy_xp', async(event) => {
+        getAttrs(["talent_points", "xp"], (values) => {
+            const tp = int(values["talent_points"]);
+            if (tp >= 4) {
+                const new_tp = tp - 4;
+                const new_xp = int(values["xp"]) + 4;
+                setAttrs({
+                    talent_points: new_tp,
+                    xp: new_xp
+                });
+            }
+        });
+    });
 
     on('clicked:begin_session', async(event) => {
         getAttrs(["talent_points", "xp", "session_number", "level"], (values) => {

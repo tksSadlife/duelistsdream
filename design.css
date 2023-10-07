@@ -216,6 +216,8 @@ button {
 }
 
 .talent_name {
+  background-color: rgb(235, 235, 235);
+  color: black;
   display: block;
   margin: 0;
   height: 100%;
@@ -280,7 +282,7 @@ input::-webkit-inner-spin-button {
 
 .xp_field button {
   margin-top: 5px;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(225, 255, 225);
 }
 
 .level {
