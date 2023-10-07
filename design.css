@@ -300,6 +300,11 @@ input::-webkit-inner-spin-button {
   border-bottom: 1px solid black;
 }
 
+.resource_field {
+  margin-top: 20px;
+  display: inline-block;
+}
+
 .resource_field input {
   border: 1px solid black;
   border-radius: 0;

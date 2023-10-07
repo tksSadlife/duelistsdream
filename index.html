@@ -2,7 +2,7 @@
     <div class="top_row">
         
 <!-- TOP LEFT -->
-        <div class="top_left">a
+        <div class="top_left">
             <div>
                 <h3> Health </h3>
                 <div class="vitality">
@@ -476,7 +476,7 @@
 
 <input name="attr_level"                type="hidden"   value="1">
 <input name="attr_xp"                   type="hidden"   value="0">
-<input name="attr_needed_xp"            type="hidden"   value="60">
+<input name="attr_needed_xp"            type="hidden"   value="24">
 
 <input name="attr_session_number"       type="hidden"   value="0">
 
@@ -552,6 +552,13 @@
         per_session: {
             xp: 4,
             talent_points: 10
+        },
+        level_requirements: {
+            2: 24,
+            3: 40,
+            4: 60,
+            5: 84,
+            6: 100
         }
     }
 
@@ -668,7 +675,7 @@
         });
     });
 
-    const level_up = () => {
+    const leveling_up = () => {
         getAttrs(["level", "current_health", "max_health", "strength", "current_mana", "max_mana"], (values) => {
             const new_level = int(values["level"]) + 1;
             const new_health = int(values["current_health"]) + data.stats["health"].per_level;
@@ -690,7 +697,7 @@
                 max_mana: new_max_mana
             });
         });
-    }
+    };
 
     const get_taxes = () => {
         getAttrs(["talent_points"], (values) => {
@@ -703,18 +710,48 @@
             else if (tp >= 10 && tp < 20) taxes = 1;
             console.log(taxes);
         });
-    }
+    };
 
     on('clicked:begin_session', async(event) => {
-        getAttrs(["talent_points", "xp", "session_number"], (values) => {
+        getAttrs(["talent_points", "xp", "session_number", "level"], (values) => {
             const new_tp = int(values["talent_points"]) + data.per_session["talent_points"];
-            const new_xp = int(values["xp"]) + data.per_session["xp"];
             const new_session_num = int(values["session_number"]) + 1;
             setAttrs({
                 talent_points: new_tp,
-                xp: new_xp,
                 session_number: new_session_num
-            })
+            });
+
+            if (values["level"] < 6) {
+                const new_xp = int(values["xp"]) + data.per_session["xp"];
+                setAttrs({
+                    xp: new_xp,
+                });
+            }
         });
     });
+
+    on('change:xp', async(event) => {
+        getAttrs(["level", "xp", "needed_xp"], (values) => {
+            const next_level = int(values["level"]) + 1;
+            const xp_for_next_level = data.level_requirements[`${next_level}`];
+            if (int(values["xp"]) >= xp_for_next_level) {
+                level_up();
+                const new_xp = int(values["xp"]) - xp_for_next_level;
+                const new_needed_xp = data.level_requirements[`${next_level+1}`]
+                setAttrs({
+                    xp: new_xp,
+                    needed_xp: new_needed_xp
+                });
+            }
+        });
+    });
+
+    const level_up = () => {
+        getAttrs(["level"], (values) => {
+            const new_level = int(values["level"]) + 1;
+            setAttrs({
+                level: new_level
+            });
+        });
+    }
 </script>
