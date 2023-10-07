@@ -2,8 +2,7 @@
     <div class="top_row">
         
 <!-- TOP LEFT -->
-        <div class="top_left">
-
+        <div class="top_left">a
             <div>
                 <h3> Health </h3>
                 <div class="vitality">
@@ -54,10 +53,13 @@
                     <div class="xp">
                         <span name="attr_xp"></span>|<span name="attr_needed_xp"></span>
                     </div>
-                    <button> Buy XP </button>
+                    <button name="act_buy_xp" type="action"> Buy XP </button>
                 </div>
-                <button class="begin_session" name="act_begin_session"> Begin session </button>
+                <button class="begin_session" name="act_begin_session" type="action"> Begin session </button>
                 <span class="level" name="attr_level"></span>
+                <div class="session_number">
+                    Session: <span name="attr_session_number"></span>
+                </div>
             </div>
 
             <div class="resource_field">
@@ -83,6 +85,10 @@
         <div class="talents_category">
             <div class="talent_top">
                 <h2> Physical </h2>
+                <div class="talent_percent">
+                    <button class="talent_rolling" name="act_roll_physical" type="action"><span name="attr_physical"></span><p>%</p></button>
+                    <button class="talent_plus" name="act_add_physical" type="action"> +2% </button>
+                </div>
             </div>
             <table>
                 <tr>
@@ -213,7 +219,13 @@
 
 <!-- MENTAL TALENTS -->
         <div class="talents_category">
-            <h2> Mental </h2>
+            <div class="talent_top">
+                <h2> Mental </h2>
+                <div class="talent_percent">
+                    <button class="talent_rolling" name="act_roll_mental" type="action"><span name="attr_mental"></span><p>%</p></button>
+                    <button class="talent_plus" name="act_add_mental" type="action"> +2% </button>
+                </div>
+            </div>
             <table>
                 <tr>
                     <!-- <th> Rank&nbsp </th> -->
@@ -337,7 +349,13 @@
 
 <!-- SOCIAL TALENTS -->
         <div class="talents_category">
-            <h2> Social </h2>
+            <div class="talent_top">
+                <h2> Social </h2>
+                <div class="talent_percent">
+                    <button class="talent_rolling" name="act_roll_social" type="action"><span name="attr_social"></span><p>%</p></button>
+                    <button class="talent_plus" name="act_add_social" type="action"> +2% </button>
+                </div>
+            </div>
             <table>
                 <tr>
                     <!-- <th> Rank&nbsp&nbsp </th> -->
@@ -460,6 +478,8 @@
 <input name="attr_xp"                   type="hidden"   value="0">
 <input name="attr_needed_xp"            type="hidden"   value="60">
 
+<input name="attr_session_number"       type="hidden"   value="0">
+
 <input name="attr_max_health"           type="hidden"   value="450">
 <input name="attr_max_mana"             type="hidden"   value="5">
 
@@ -468,6 +488,10 @@
 <input name="attr_reflex"               type="hidden"   value="15">
 <input name="attr_defense"              type="hidden"   value="15">
 <input name="attr_resistance"           type="hidden"   value="0">
+
+<input name="attr_physical"             type="hidden"   value="10">
+<input name="attr_mental"               type="hidden"   value="10">
+<input name="attr_social"               type="hidden"   value="10">
 
 <input name="attr_p1_rank"              type="hidden"   value="0">
 <input name="attr_p2_rank"              type="hidden"   value="0">
@@ -524,6 +548,10 @@
             rank3talents: ["AnimalHandling", "Appearance", "Craft", "Diplomacy", "Fabled", "Fauna", "Forge", "Marksman", "Medicine", "Movement", "Profile", "Soldier", "Weaponist"],
             rank4talents: ["Awareness", "Charisma", "Expression", "Furtiveness", "Lancer", "Nurse", "Occupation", "Parkour", "Perception", "Self-Control", "StasiVoli", "Thief"],
             rank5talents: ["Adaptation", "Assassin", "Knight", "MartialArts", "Breath", "Cogium", "Might", "Nullify", "Oblige", "Radiance", "Tactics", "Teach", "Tribal", "Pnaevaru"],
+        },
+        per_session: {
+            xp: 4,
+            talent_points: 10
         }
     }
 
@@ -677,10 +705,16 @@
         });
     }
 
-    on('clicked:level_up', (e) => {
-        const test = ["lol", "test"];
-        setAttrs({
-            level: test
-        })
+    on('clicked:begin_session', async(event) => {
+        getAttrs(["talent_points", "xp", "session_number"], (values) => {
+            const new_tp = int(values["talent_points"]) + data.per_session["talent_points"];
+            const new_xp = int(values["xp"]) + data.per_session["xp"];
+            const new_session_num = int(values["session_number"]) + 1;
+            setAttrs({
+                talent_points: new_tp,
+                xp: new_xp,
+                session_number: new_session_num
+            })
+        });
     });
 </script>

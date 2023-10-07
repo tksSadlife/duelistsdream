@@ -24,6 +24,7 @@ button {
 
 .top_row {
   width: 840px;
+  margin-bottom: 30px;
 }
 
 .top_left {
@@ -67,6 +68,7 @@ button {
 .vitality {
   border: 1px solid black;
   vertical-align: middle;
+  margin-bottom: 10px;
 }
 
 .vitality input {
@@ -131,6 +133,47 @@ button {
 
 .talent_top {
   border: 1px solid black;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+
+.talent_top h2 {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.talent_percent {
+  float: right;
+  margin-right: 10px;
+}
+
+.talent_percent span {
+  display: inline-table;
+  font-size: large;
+  padding: 5px 0;
+}
+
+.talent_percent p {
+  font-size: large;
+}
+
+.talent_rolling {
+  background-color: rgb(235, 235, 235);
+  border: none;
+  border-radius: 0;
+  padding-top: 3px;
+}
+
+.talent_rolling span {
+  background-color: rgb(235, 235, 235);
+}
+
+.talent_plus {
+  margin-left: 10px;
+  display: inline-table;
+  padding: auto;
+  vertical-align: middle;
+  background-color: rgb(255, 225, 225);
 }
 
 .talents_category {
@@ -242,13 +285,19 @@ input::-webkit-inner-spin-button {
 
 .level {
   border: 1px solid black;
-  display: inline-block;
+  float: right;
   font-size: xx-large;
   width: 45px;
   height: 45px;
   padding: 0;
   vertical-align: middle;
-  margin: 0;
+  margin-right: 10px;
+}
+
+.session_number {
+  float: right;
+  font-size: medium;
+  border-bottom: 1px solid black;
 }
 
 .resource_field input {
@@ -284,12 +333,11 @@ input::-webkit-inner-spin-button {
 }
 
 .begin_session {
-  display: inline-block;
+  float: right;
   width: 25%;
   border: 1px solid black;
   border-radius: 5px;
   font-size: medium;
   vertical-align: top;
-  margin-left: 35px;
   background-color: rgb(235, 235, 235);
 }
