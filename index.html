@@ -81,7 +81,9 @@
     <div class="bottom_row">
 <!-- PHYSICAL TALENTS -->
         <div class="talents_category">
-            <h2> Physical </h2>
+            <div class="talent_top">
+                <h2> Physical </h2>
+            </div>
             <table>
                 <tr>
                     <!-- <th> Rank&nbsp&nbsp </th> -->
@@ -525,6 +527,14 @@
         }
     }
 
+    const get_rank = (talent_name) => {
+        if (data.talents.rank1talents.includes(talent_name)) return 1;
+        if (data.talents.rank2talents.includes(talent_name)) return 2;
+        if (data.talents.rank3talents.includes(talent_name)) return 3;
+        if (data.talents.rank4talents.includes(talent_name)) return 4;
+        if (data.talents.rank5talents.includes(talent_name)) return 5;
+    }
+
     const names = [ "p1", "p2", "p3", 
                     "m1", "m2", "m3",
                     "s1", "s2", "s3"];
@@ -570,15 +580,8 @@
         });
     });
 
-    const get_rank = (talent_name) => {
-        if (data.talents.rank1talents.includes(talent_name)) return 1;
-        if (data.talents.rank2talents.includes(talent_name)) return 2;
-        if (data.talents.rank3talents.includes(talent_name)) return 3;
-        if (data.talents.rank4talents.includes(talent_name)) return 4;
-        if (data.talents.rank5talents.includes(talent_name)) return 5;
-    }
-
     const int = score => parseInt(score, 10) || 0;
+
     on('clicked:add_max_health clicked:add_max_mana', async(event) => {
         const source_max_stat = event.triggerName.substring(12);
         const source_stat_short = source_max_stat.substring(4);
