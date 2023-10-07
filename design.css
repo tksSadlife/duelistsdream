@@ -1,0 +1,426 @@
+span {
+  background-color: rgb(235, 235, 235);
+  padding: 1px;
+  text-align: center;
+}
+
+p {
+  font-size: larger;
+  display: inline-block;
+}
+
+input {
+  background-color: white;
+  border-radius: 0;
+  text-align: center;
+}
+
+.top_row {
+}
+
+.top_left {
+  display: inline-block;
+  width: 30%;
+  margin-right: 4.5%;
+}
+
+.top_mid {
+  display: inline-block;
+  width: 25%;
+  margin-right: 4.5%;
+}
+
+.top_right {
+  display: inline-block;
+  width: 35%;
+  background-color: pink;
+}
+
+
+.bottom_row {
+  margin-top: 20px;
+}
+
+.bottom_part {
+  background-color: lightgreen;
+  display: inline-block;
+  width: 30%;
+  margin-right: 3%;
+}
+
+/* VITALITY */
+
+.vitality {
+}
+
+.vitality {
+  border: 1px solid black;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.vitality input, .vitality span {
+  width: 35%;
+  height: 100%;
+  border: none;
+  font-size: large;
+  vertical-align: middle;
+}
+
+.vitality input {
+  background-color: white;
+  border: none;
+}
+
+.vitality span {
+  display: inline-block;
+}
+
+.add_max_button {
+  min-width: 10%;
+  width: 15%;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  vertical-align: middle;
+}
+
+/* STATS */
+
+.stat {
+  border: 1px solid black;
+  vertical-align: middle;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.stat_name {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  /* border-right: 1px solid black; */
+  font-size: medium;
+  vertical-align: middle;
+  background-color: white;
+}
+
+.stat_max {
+  display: inline-block;
+  width: 20%;
+  height: 100%;
+  font-size: medium;
+  vertical-align: middle;
+}
+
+/* TALENTS */
+
+.bottom_row {
+  background-color: white;
+  margin-top: 20px;
+}
+
+.talents_category {
+  display: inline-block;
+  background-color: white;
+  width: 30%;
+  margin-right: 2%;
+}
+
+.bottom_row th {
+  font-size: medium;
+}
+
+.bottom_row td {
+  border: 1px solid black;
+}
+
+.talent_short {
+  width: 10%;
+}
+
+.talent_very_short {
+  width: 5%;
+}
+
+.talent_long {
+  width: 80%;
+}
+
+.talent_field {
+  margin-bottom: 20px;
+}
+
+.talent_rank {
+  display: block;
+  margin: 0;
+  height: 100%;
+  font-size: medium;
+}
+
+.talent_name {
+  display: block;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: medium;
+}
+
+.talent_level {
+  display: block;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: medium;
+}
+
+.talent_button {
+  display: block;
+  text-align: center;
+  margin: 0;
+  height: 100%;
+  border: none;
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* LEVEL */
+
+.level_field {
+  background-color: lightblue;
+}
+
+.xp {
+  display: inline-block;
+  width: 40%;
+}
+
+.xp input {
+  display: block;
+  width: 100%;
+}
+
+.xp button {
+  display: block;
+}
+
+.level {
+  border: 1px solid black;
+  display: inline-block;
+  width: 25%;
+  padding: 5px 0;
+  font-size: xx-large;
+  vertical-align: middle;
+}
+
+.begin_session {
+  display: inline-block;
+  width: 25%;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: medium;
+}
+
+
+/* span {
+  background-color: rgb(235, 235, 235);
+  padding: 5px;
+}
+
+.characteristics_div {
+  background-color: pink;
+  display: block;
+  width: 60%;
+}
+
+.characteristics_div td {
+  border: 1px solid black;
+  border-radius: 0;
+  background-color: white;
+}
+
+.characteristics_div td input {
+  background-color: white;
+  border: none;
+}
+
+.level_div {
+  background-color: lightgreen;
+  display: block;
+  width: 30%;
+  align-items: right;
+}
+
+
+
+.stats_div {
+  background-color: pink;
+  display: block;
+  margin-top: 20px;
+}
+
+.stat_field {
+  display: inline-block;
+}
+
+.stat {
+  display: inline-block;
+  background-color: white;
+  width: 40px;
+  height: 0;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+}
+
+.stat_name {
+  text-align: center;
+  padding: 5px;
+}
+
+.stat_max {
+  display: inline-block;
+  height: 100%;
+  text-align: center;
+}
+
+.stat_short {
+  display: inline-block;
+  background-color: white;
+  width: 30px;
+  height: 0;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+}
+
+.stat_max_short {
+  display: inline-block;
+  height: 100%;
+  text-align: center;
+}
+
+.stat_max_button {
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: white;
+  margin-right: 5px;
+}
+
+.resistance_special {
+  margin-left: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.talents_div {
+  background-color: white;
+  margin-top: 20px;
+}
+
+.talents_div_part {
+  display: inline-block;
+  background-color: white;
+  width: 30%;
+  margin-right: 2%;
+}
+
+.talents_div td {
+  border: 1px solid black;
+  border-radius: 0;
+}
+
+.talent_short {
+  width: 10%;
+}
+
+.talent_long {
+  width: 70%;
+}
+
+.talent_field {
+  margin-bottom: 20px;
+}
+
+.talent_rank {
+  display: block;
+  text-align: center;
+  margin: 0;
+  height: 100%;
+}
+
+.talent_name {
+  display: block;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+.talent_level {
+  display: block;
+  text-align: center;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+.talent_button {
+  display: block;
+  text-align: center;
+  margin: 0;
+  height: 100%;
+  border: none;
+  background-color: white;
+  border: none;
+} */
+
+
+/* .level_div {
+  position: relative;
+  float: right;
+  margin: 0;
+  display: inline-block;
+  background-color: yellow;
+}
+
+.begin_session {
+  position: relative;
+  float: right;
+  margin-right: 50px;
+  display: inline-block;
+}
+
+.level_header {
+  font-size: 25px;
+}
+
+.level {
+  border: 1px solid black;
+  border-radius: 0;
+  padding: 0;
+  display: block;
+  aspect-ratio: 1 / 1;
+  text-align: center;
+  font-size: 50px;
+  width: 100%;
+}
+
+.tp_and_ad {
+  border: 1px solid black;
+  border-radius: 0;
+  background-color: white;
+} */
