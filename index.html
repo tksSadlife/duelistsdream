@@ -7,14 +7,12 @@
             <div>
                 <h3> Health </h3>
                 <div class="vitality">
-                    <input name="attr_current_health" type="text" value="450" />
-                    <span name="attr_max_health"></span>
+                    <input name="attr_current_health" type="text" value="450" /><span name="attr_max_health"></span>
                     <button class="add_max_button" name="act_add_max_health" type="action"> +150 </button>
                 </div>
                 <h3> Mana </h3>
                 <div class="vitality">
-                    <input name="attr_current_mana" type="text" value="5" />
-                    <span name="attr_max_mana"></span>
+                    <input name="attr_current_mana" type="text" value="5" /><span name="attr_max_mana"></span>
                     <button class="add_max_button" name="act_add_max_mana" type="action"> +1 </button>
                 </div>
             </div>
@@ -27,28 +25,23 @@
         <div class="top_mid">
             <div class="stats">
                 <div class="stat">
-                    <span class="stat_name"> Strength </span>
-                    <span class="stat_max" name="attr_strength"></span>
+                    <span class="stat_name"> Strength </span><span class="stat_max" name="attr_strength"></span>
                     <button class="add_max_button" name="act_add_strength" type="action"> +10 </button>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Ability Power </span>
-                    <span class="stat_max" name="attr_ability_power"></span>
+                    <span class="stat_name"> Ability Power </span><span class="stat_max" name="attr_ability_power"></span>
                     <button class="add_max_button" name="act_add_ability_power" type="action"> +1 </button>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Reflex </span>
-                    <span class="stat_max" name="attr_reflex"></span>
+                    <span class="stat_name"> Reflex </span><span class="stat_max" name="attr_reflex"></span>
                     <button class="add_max_button" name="act_add_reflex" type="action"> +3 </button>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Defense </span>
-                    <span class="stat_max" name="attr_defense"></span>
+                    <span class="stat_name"> Defense </span><span class="stat_max" name="attr_defense"></span>
                     <button class="add_max_button" name="act_add_defense" type="action"> +3 </button>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Resistance </span>
-                    <span class="stat_max" name="attr_resistance"></span>
+                    <span class="stat_name"> Resistance </span><span class="stat_max" name="attr_resistance"></span>
                     <button class="add_max_button" name="act_add_resistance" type="action"> +20% </button>
                 </div>
             </div>
@@ -57,23 +50,29 @@
 <!-- TOP RIGHT -->
         <div class="top_right">
             <div class="level_field">
-                <div class="xp">
-                    <input name="attr_xp" type="number" value="0" />
+                <div class="xp_field">
+                    <div class="xp">
+                        <span name="attr_xp"></span>|<span name="attr_needed_xp"></span>
+                    </div>
                     <button> Buy XP </button>
                 </div>
-                <span class="level" name="attr_level"></span>
                 <button class="begin_session" name="act_begin_session"> Begin session </button>
+                <span class="level" name="attr_level"></span>
             </div>
 
             <div class="resource_field">
-                <h2> TP </h2>
-                <input name="attr_talent_points" type="number" value="119" />
-    
-                <h2> aD </h2>
-                <input name="attr_adaptive_development" type="number" value="5" />
-                
-                <h2> SP </h2>
-                <input name="attr_skill_points" type="number" value="2" />
+                <div class="tp">
+                    <h2> TP </h2>
+                    <input name="attr_talent_points" type="number" value="119" />
+                </div>
+                <div class="ad">
+                    <h2> aD </h2>
+                    <input name="attr_adaptive_development" type="number" value="5" />
+                </div>
+                <div class="sp">
+                    <h2> SP </h2>
+                    <input name="attr_skill_points" type="number" value="2" />
+                </div>
             </div>
 
         </div>
@@ -456,6 +455,8 @@
 </div>
 
 <input name="attr_level"                type="hidden"   value="1">
+<input name="attr_xp"                   type="hidden"   value="0">
+<input name="attr_needed_xp"            type="hidden"   value="60">
 
 <input name="attr_max_health"           type="hidden"   value="450">
 <input name="attr_max_mana"             type="hidden"   value="5">

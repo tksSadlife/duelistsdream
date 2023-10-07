@@ -11,8 +11,15 @@ p {
 
 input {
   background-color: rgb(235, 235, 235);
+  color: black;
   border-radius: 0;
   text-align: center;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid black;
+  vertical-align: middle;
 }
 
 .top_row {
@@ -20,27 +27,26 @@ input {
 }
 
 .top_left {
-  background-color: pink;
+  background-color: white;
   display: inline-block;
   vertical-align: top;
   width: 250px;
-  margin-right: 15px;
+  margin-right: 25px;
 }
 
 .top_mid {
-  background-color: yellow;
+  background-color: white;
   display: inline-block;
   vertical-align: top;
-  width: 250px;
-  margin-right: 15px;
+  width: 230px;
+  margin-right: 25px;
 }
 
 .top_right {
-  background-color: pink;
+  background-color: white;
   display: inline-block;
   width: 300px;
 }
-
 
 .bottom_row {
   margin-top: 20px;
@@ -77,14 +83,12 @@ input {
   font-size: large;
   vertical-align: middle;
   display: inline-block;
+  border-right: 1px solid black;
 }
 
 .add_max_button {
   width: 40px;
-  background-color: rgb(235, 235, 235);
-  border-radius: 10px;
-  border: 1px solid black;
-  vertical-align: middle;
+  background-color: rgb(255, 225, 225);
 }
 
 /* STATS */
@@ -96,14 +100,14 @@ input {
   border: 1px solid black;
   vertical-align: middle;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .stat_name {
   display: inline-block;
   width: 50%;
   height: 100%;
-  /* border-right: 1px solid black; */
+  border-right: 1px solid black;
   font-size: medium;
   vertical-align: middle;
   background-color: white;
@@ -113,6 +117,7 @@ input {
   display: inline-block;
   width: 20%;
   height: 100%;
+  border-right: 1px solid black;
   font-size: medium;
   vertical-align: middle;
 }
@@ -160,6 +165,7 @@ input {
   margin: 0;
   height: 100%;
   font-size: medium;
+  color: black;
 }
 
 .talent_name {
@@ -178,6 +184,7 @@ input {
   width: 100%;
   border: none;
   font-size: medium;
+  background-color: rgb(225, 255, 225);
 }
 
 .talent_button {
@@ -200,30 +207,75 @@ input::-webkit-inner-spin-button {
 /* LEVEL */
 
 .level_field {
-  background-color: lightblue;
+  vertical-align: top;
+  margin-bottom: 20px;
 }
 
-.xp {
+.xp_field {
+  vertical-align: top;
   display: inline-block;
   width: 40%;
 }
 
-.xp input {
-  display: block;
-  width: 100%;
+.xp {
+  border: 1px solid black;
+  vertical-align: middle;
 }
 
-.xp button {
-  display: block;
+.xp span {
+  display: inline-block;
+  width: 48%;
+  border: none;
+  font-size: large;
+  vertical-align: middle;
+  padding: 0;
+}
+
+.xp_field button {
+  margin-top: 5px;
 }
 
 .level {
   border: 1px solid black;
   display: inline-block;
-  width: 25%;
-  padding: 5px 0;
   font-size: xx-large;
+  width: 45px;
+  height: 45px;
+  padding: 0;
   vertical-align: middle;
+  margin: 0;
+}
+
+.resource_field input {
+  border: 1px solid black;
+  border-radius: 0;
+  font-size: large;
+}
+
+.tp {
+  display: inline-block;
+  margin-right: 25px;
+}
+
+.ad {
+  display: inline-block;
+  margin-right: 25px;
+}
+
+.sp {
+  display: inline-block;
+}
+
+.tp input {
+  background-color: rgb(225, 255, 225);
+}
+
+.ad input {
+  background-color: rgb(255, 225, 225);
+}
+
+.sp input {
+  background-color: rgb(225, 225, 255);
 }
 
 .begin_session {
@@ -232,6 +284,8 @@ input::-webkit-inner-spin-button {
   border: 1px solid black;
   border-radius: 5px;
   font-size: medium;
+  vertical-align: top;
+  margin-left: 35px;
 }
 
 
