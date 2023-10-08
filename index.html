@@ -6,13 +6,11 @@
             <div>
                 <h3> Health </h3>
                 <div class="vitality">
-                    <input name="attr_current_health" type="text" value="450" /><span name="attr_max_health"></span>
-                    <button class="add_max_button" name="act_add_max_health" type="action"> +150 </button>
+                    <input name="attr_current_health" type="text" value="450" /><span class="max_value" name="attr_max_health"></span><button class="add_max_button" name="act_add_max_health" type="action"> +150 </button><span class="max_count" name="attr_health_count"></span>
                 </div>
                 <h3> Mana </h3>
                 <div class="vitality">
-                    <input name="attr_current_mana" type="text" value="5" /><span name="attr_max_mana"></span>
-                    <button class="add_max_button" name="act_add_max_mana" type="action"> +1 </button>
+                    <input name="attr_current_mana" type="text" value="5" /><span class="max_value" name="attr_max_mana"></span><button class="add_max_button" name="act_add_max_mana" type="action"> +1 </button><span class="max_count" name="attr_mana_count"></span>
                 </div>
             </div>
             <div class="weapon">
@@ -24,24 +22,19 @@
         <div class="top_mid">
             <div class="stats">
                 <div class="stat">
-                    <span class="stat_name"> Strength </span><span class="stat_max" name="attr_strength"></span>
-                    <button class="add_max_button" name="act_add_strength" type="action"> +10 </button>
+                    <span class="stat_name"> Strength </span><span class="stat_max" name="attr_max_strength"></span><button class="add_max_button" name="act_add_max_strength" type="action"> +7 </button><span class="max_count" name="attr_strength_count"></span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Ability Power </span><span class="stat_max" name="attr_ability_power"></span>
-                    <button class="add_max_button" name="act_add_ability_power" type="action"> +1 </button>
+                    <span class="stat_name"> Ability Power </span><span class="stat_max" name="attr_max_ability_power"></span><button class="add_max_button" name="act_add_max_ability_power" type="action"> +1 </button><span class="max_count" name="attr_ability_power_count"></span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Reflex </span><span class="stat_max" name="attr_reflex"></span>
-                    <button class="add_max_button" name="act_add_reflex" type="action"> +3 </button>
+                    <span class="stat_name"> Reflex </span><span class="stat_max" name="attr_max_reflex"></span><button class="add_max_button" name="act_add_max_reflex" type="action"> +3 </button><span class="max_count" name="attr_reflex_count"></span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Defense </span><span class="stat_max" name="attr_defense"></span>
-                    <button class="add_max_button" name="act_add_defense" type="action"> +3 </button>
+                    <span class="stat_name"> Defense </span><span class="stat_max" name="attr_max_defense"></span><button class="add_max_button" name="act_add_max_defense" type="action"> +3 </button><span class="max_count" name="attr_defense_count"></span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Resistance </span><span class="stat_max" name="attr_resistance"></span>
-                    <button class="add_max_button" name="act_add_resistance" type="action"> +20% </button>
+                    <span class="stat_name"> Resistance </span><span class="stat_max" name="attr_max_resistance"></span><button class="add_max_button" name="act_add_max_resistance" type="action"> +20% </button><span class="max_count" name="attr_resistance_count"></span>
                 </div>
             </div>
         </div>
@@ -64,15 +57,15 @@
 
             <div class="resource_field">
                 <div class="tp">
-                    <h2> TP </h2>
+                    <span> Talent Points </span>
                     <input name="attr_talent_points" type="number" value="119" />
                 </div>
                 <div class="ad">
-                    <h2> aD </h2>
+                    <span> Adaptive Development </span>
                     <input name="attr_adaptive_development" type="number" value="5" />
                 </div>
                 <div class="sp">
-                    <h2> SP </h2>
+                    <span> Skill Points </span>
                     <input name="attr_skill_points" type="number" value="2" />
                 </div>
             </div>
@@ -483,11 +476,20 @@
 <input name="attr_max_health"           type="hidden"   value="450">
 <input name="attr_max_mana"             type="hidden"   value="5">
 
-<input name="attr_strength"             type="hidden"   value="25">
-<input name="attr_ability_power"        type="hidden"   value="0">
-<input name="attr_reflex"               type="hidden"   value="15">
-<input name="attr_defense"              type="hidden"   value="15">
-<input name="attr_resistance"           type="hidden"   value="0">
+<input name="attr_health_count"         type="hidden"   value="0">
+<input name="attr_mana_count"           type="hidden"   value="0">
+
+<input name="attr_max_strength"             type="hidden"   value="25">
+<input name="attr_max_ability_power"        type="hidden"   value="0">
+<input name="attr_max_reflex"               type="hidden"   value="15">
+<input name="attr_max_defense"              type="hidden"   value="15">
+<input name="attr_max_resistance"           type="hidden"   value="0">
+
+<input name="attr_strength_count"       type="hidden"   value="0">
+<input name="attr_ability_power_count"  type="hidden"   value="0">
+<input name="attr_reflex_count"         type="hidden"   value="0">
+<input name="attr_defense_count"        type="hidden"   value="0">
+<input name="attr_resistance_count"     type="hidden"   value="0">
 
 <input name="attr_physical"             type="hidden"   value="10">
 <input name="attr_mental"               type="hidden"   value="10">
@@ -508,38 +510,59 @@
         stats: {
             health: {
                 name: "health",
+                base: 450,
+                max: null,
                 per_level: 50,
-                per_adaptive_development: 150
-            },
-            strength: {
-                name: "strength",
-                per_level: 3,
-                per_adaptive_development: 10
-            },
-            ability_power: {
-                name: "ability_power",
-                per_level: 0,
-                per_adaptive_development: 1
-            },
-            reflex: {
-                name: "reflex",
-                per_level: 0,
-                per_adaptive_development: 20
-            },
-            defense: {
-                name: "defense",
-                per_level: 0,
-                per_adaptive_development: 20
-            },
-            resistance: {
-                name: "resistance",
-                per_level: 0,
-                per_adaptive_development: 15
+                per_adaptive_development: 150,
+                max_adaptive_development: 13
             },
             mana: {
                 name: "mana",
+                base: 5,
+                max: 17,
                 per_level: 1,
-                per_adaptive_development: 1
+                per_adaptive_development: 1,
+                max_adaptive_development: "level"
+            },
+            strength: {
+                name: "strength",
+                base: 25,
+                max: null,
+                per_level: 3,
+                per_adaptive_development: 7,
+                max_adaptive_development: 13
+            },
+            ability_power: {
+                name: "ability_power",
+                base: 0,
+                max: null,
+                per_level: 0,
+                per_adaptive_development: 1,
+                max_adaptive_development: null
+            },
+            reflex: {
+                name: "reflex",
+                base: 15,
+                max: null,
+                per_level: 0,
+                per_adaptive_development: 3,
+                max_adaptive_development: 13
+            },
+            defense: {
+                name: "defense",
+                base: 15,
+                max: null,
+                per_level: 0,
+                per_adaptive_development: 3,
+                max_adaptive_development: 13
+            },
+            resistance: {
+                name: "resistance",
+                base: 0,
+                max: null,
+                per_level: 0,
+                per_adaptive_development: 20,
+                max_adaptive_development: "level"
             }
         },
         talents: {
@@ -617,87 +640,37 @@
 
     const int = score => parseInt(score, 10) || 0;
 
-    on('clicked:add_max_health clicked:add_max_mana', async(event) => {
-        const source_max_stat = event.triggerName.substring(12);
-        const source_stat_short = source_max_stat.substring(4);
-        const source_stat = 'current_' + source_stat_short;
-        getAttrs([source_max_stat, source_stat, "adaptive_development", "level"], (values) => {
-
-            let addition = data.stats[source_stat_short].per_adaptive_development;
-
-            const new_max_stat = int(values[source_max_stat]) + addition;
-            const new_stat = int(values[source_stat]) + addition;
-            const new_adaptive_development = values["adaptive_development"] - 1;
-
-            let canLevel = true;
-
-            if (source_stat === 'current_mana' && (new_max_stat > 17 || new_max_stat-5-values["level"]>values["level"])) {
-                canLevel = false;
+    on('clicked:add_max_health clicked:add_max_mana clicked:add_max_strength clicked:add_max_ability_power clicked:add_max_reflex clicked:add_max_defense clicked:add_max_resistance', async(event) => {
+        const stat_kind_max = event.triggerName.substring(12);
+        const stat_kind = stat_kind_max.substring(4);
+        getAttrs([`${stat_kind_max}`, `${stat_kind}_count`, "adaptive_development", "level"], (values) => {
+            const current_max = int(values[`${stat_kind_max}`]);
+            const current_count = int(values[`${stat_kind}_count`]);
+            let allowed_max = data.stats[`${stat_kind}`].max;
+            if (allowed_max === null) {
+                allowed_max = current_max + 1;
+            }
+            let allowed_count = data.stats[`${stat_kind}`].max_adaptive_development;
+            if (allowed_count === "level") {
+                allowed_count = int(values["level"]);
+            }
+            else if (allowed_count === null) {
+                allowed_count = current_count + 1;
             }
 
-            if (new_adaptive_development < 0) {
-                canLevel = false;
-            }
-
-            if (canLevel) {
+            const can_add = values["adaptive_development"] > 0 && current_max < allowed_max && current_count < allowed_count;
+            if (can_add) {
+                const new_ad = int(values["adaptive_development"]) - 1;
+                const new_count = current_count + 1;
+                const new_max = current_max + data.stats[stat_kind].per_adaptive_development;
                 setAttrs({
-                    [source_max_stat]: new_max_stat,
-                    [source_stat]: new_stat,
-                    adaptive_development: new_adaptive_development,
+                    adaptive_development: new_ad,
+                    [`${stat_kind}_count`]: new_count,
+                    [stat_kind_max]: new_max
                 });
             }
         });
     });
-
-    on('clicked:add_strength clicked:add_ability_power clicked:add_reflex clicked:add_defense clicked:add_resistance', async(event) => {
-        const source_stat = event.triggerName.substring(12);
-        getAttrs([source_stat, "adaptive_development", "level"], (values) => {
-            let addition = data.stats[source_stat].per_adaptive_development;
-
-            const new_stat = int(values[source_stat]) + addition;
-            const new_adaptive_development = values["adaptive_development"] - 1;
-
-            let canLevel = true;
-
-            if (source_stat === 'resistance' && (new_stat > 200 || new_stat/15>values["level"])) {
-                canLevel = false;
-            }
-            if (new_adaptive_development < 0) {
-                canLevel = false;
-            }
-
-            if (canLevel) {
-                setAttrs({
-                    [source_stat]: new_stat,
-                    adaptive_development: new_adaptive_development
-                });
-            }
-        });
-    });
-
-    const leveling_up = () => {
-        getAttrs(["level", "current_health", "max_health", "strength", "current_mana", "max_mana"], (values) => {
-            const new_level = int(values["level"]) + 1;
-            const new_health = int(values["current_health"]) + data.stats["health"].per_level;
-            const new_max_health = int(values["max_health"]) + data.stats["health"].per_level;
-            const new_strength = int(values["strength"]) + data.stats["strength"].per_level;
-            let new_mana = int(values["current_mana"]);
-            let new_max_mana = int(values["max_mana"]);
-            if (int(values["max_mana"]) < 17) {
-                new_mana = int(values["current_mana"]) + data.stats["mana"].per_level;
-                new_max_mana = int(values["max_mana"]) + data.stats["mana"].per_level;
-            }
-
-            setAttrs({
-                level: new_level,
-                current_health: new_health,
-                max_health: new_max_health,
-                strength: new_strength,
-                current_mana: new_mana,
-                max_mana: new_max_mana
-            });
-        });
-    };
 
     on('clicked:add_physical clicked:add_mental clicked:add_social', async(event) => {
         const talent_kind = event.triggerName.substring(12);

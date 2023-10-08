@@ -1,3 +1,5 @@
+/* GENERAL */
+
 span {
   background-color: white;
   padding: 1px;
@@ -10,7 +12,7 @@ p {
 }
 
 input {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(225, 225, 225);
   color: black;
   border-radius: 0;
   text-align: center;
@@ -22,6 +24,8 @@ button {
   vertical-align: middle;
 }
 
+/* TOP STRUCTURE */
+
 .top_row {
   width: 840px;
   margin-bottom: 30px;
@@ -31,8 +35,8 @@ button {
   background-color: white;
   display: inline-block;
   vertical-align: top;
-  width: 250px;
-  margin-right: 25px;
+  width: 208px;
+  margin-right: 45px;
 }
 
 .top_mid {
@@ -40,7 +44,7 @@ button {
   display: inline-block;
   vertical-align: top;
   width: 230px;
-  margin-right: 25px;
+  margin-right: 45px;
 }
 
 .top_right {
@@ -49,21 +53,7 @@ button {
   width: 300px;
 }
 
-.bottom_row {
-  margin-top: 20px;
-}
-
-.bottom_part {
-  background-color: lightgreen;
-  display: inline-block;
-  width: 30%;
-  margin-right: 3%;
-}
-
-/* VITALITY */
-
-.vitality {
-}
+/* TOP LEFT: VITALITY */
 
 .vitality {
   border: 1px solid black;
@@ -72,43 +62,46 @@ button {
 }
 
 .vitality input {
-  width: 90px;
+  width: 60px;
   border: none;
   font-size: large;
   vertical-align: middle;
-  border-right: 1px solid black;
 }
 
 .vitality span {
-  width: 90px;
-  border: none;
-  font-size: large;
   vertical-align: middle;
   display: inline-block;
-  border-right: 1px solid black;
+  border-left: 1px solid black;
 }
 
-.add_max_button {
-  width: 40px;
-  background-color: rgb(255, 235, 235);
+.vitality .max_value {
+  font-size: large;
+  width: 60px;
 }
 
-/* STATS */
-
-.stats {
+.vitality .add_max_button {
+  width: 30px;
+  background-color: rgb(255, 225, 225);
+  margin-right: 10px;
 }
+
+.vitality .max_count {
+  width: 25px;
+  text-align: center;
+  font-size: small;
+}
+
+/* TOP MID: STATS */
 
 .stat {
   border: 1px solid black;
   vertical-align: middle;
-  width: 100%;
   margin-bottom: 15px;
 }
 
 .stat_name {
+  width: 100px;
   display: inline-block;
-  width: 50%;
-  height: 100%;
   border-right: 1px solid black;
   font-size: medium;
   vertical-align: middle;
@@ -116,19 +109,125 @@ button {
 }
 
 .stat_max {
+  width: 30px;
   display: inline-block;
-  width: 20%;
   height: 100%;
-  border-right: 1px solid black;
   font-size: medium;
   vertical-align: middle;
 }
 
-/* TALENTS */
+.stat button {
+  width: 40px;
+  background-color: rgb(255, 225, 225);
+  margin-right: 10px;
+}
+
+.stat .max_count {
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+  font-size: small;
+  border-left: 1px solid black;
+}
+
+/* TOP RIGHT: LEVEL */
+
+.level_field {
+  vertical-align: top;
+  margin-bottom: 20px;
+}
+
+.xp_field {
+  vertical-align: top;
+  display: inline-block;
+  width: 40%;
+}
+
+.xp {
+  border: 1px solid black;
+  vertical-align: middle;
+}
+
+.xp span {
+  display: inline-block;
+  width: 48%;
+  border: none;
+  font-size: large;
+  vertical-align: middle;
+  padding: 0;
+}
+
+.xp_field button {
+  margin-top: 5px;
+  background-color: rgb(225, 255, 225);
+}
+
+.level {
+  border: 1px solid black;
+  float: right;
+  font-size: xx-large;
+  width: 45px;
+  height: 45px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.begin_session {
+  float: right;
+  width: 25%;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: medium;
+  vertical-align: top;
+  background-color: rgb(225, 225, 225);
+}
+
+.session_number {
+  float: right;
+  font-size: medium;
+  border-bottom: 1px solid black;
+}
+
+/* TOP RIGHT: RESOURCES */
+
+.resource_field {
+  margin-top: 30px;
+  float: right;
+}
+
+.resource_field span {
+  margin-right: 5px;
+  text-align: right;
+  vertical-align: middle;
+  font-size: large;
+  display: inline-block;
+  width: 200px;
+}
+
+.resource_field input {
+  border: 1px solid black;
+  border-radius: 0;
+  font-size: large;
+}
+
+.tp input {
+  background-color: rgb(225, 255, 225);
+}
+
+.ad input {
+  background-color: rgb(255, 225, 225);
+}
+
+.sp input {
+  background-color: rgb(225, 225, 255);
+}
+
+/* BOTTOM: TALENTS */
 
 .bottom_row {
   background-color: white;
   margin-top: 20px;
+  width: 840px;
 }
 
 .talent_top {
@@ -158,14 +257,14 @@ button {
 }
 
 .talent_rolling {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(225, 225, 225);
   border: none;
   border-radius: 0;
   padding-top: 3px;
 }
 
 .talent_rolling span {
-  background-color: rgb(235, 235, 235);
+  background-color: transparent;
 }
 
 .talent_plus {
@@ -173,7 +272,7 @@ button {
   display: inline-table;
   padding: auto;
   vertical-align: middle;
-  background-color: rgb(255, 235, 235);
+  background-color: rgb(255, 225, 225);
 }
 
 .talents_category {
@@ -216,7 +315,7 @@ button {
 }
 
 .talent_name {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(225, 225, 225);
   color: black;
   display: block;
   margin: 0;
@@ -233,7 +332,7 @@ button {
   width: 100%;
   border: none;
   font-size: medium;
-  background-color: rgb(235, 255, 235);
+  background-color: rgb(225, 255, 225);
 }
 
 .talent_button {
@@ -251,100 +350,4 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-/* LEVEL */
-
-.level_field {
-  vertical-align: top;
-  margin-bottom: 20px;
-}
-
-.xp_field {
-  vertical-align: top;
-  display: inline-block;
-  width: 40%;
-}
-
-.xp {
-  border: 1px solid black;
-  vertical-align: middle;
-}
-
-.xp span {
-  display: inline-block;
-  width: 48%;
-  border: none;
-  font-size: large;
-  vertical-align: middle;
-  padding: 0;
-}
-
-.xp_field button {
-  margin-top: 5px;
-  background-color: rgb(235, 255, 235);
-}
-
-.level {
-  border: 1px solid black;
-  float: right;
-  font-size: xx-large;
-  width: 45px;
-  height: 45px;
-  padding: 0;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-
-.session_number {
-  float: right;
-  font-size: medium;
-  border-bottom: 1px solid black;
-}
-
-.resource_field {
-  margin-top: 20px;
-  display: inline-block;
-}
-
-.resource_field input {
-  border: 1px solid black;
-  border-radius: 0;
-  font-size: large;
-}
-
-.tp {
-  display: inline-block;
-  margin-right: 25px;
-}
-
-.ad {
-  display: inline-block;
-  margin-right: 25px;
-}
-
-.sp {
-  display: inline-block;
-}
-
-.tp input {
-  background-color: rgb(235, 255, 235);
-}
-
-.ad input {
-  background-color: rgb(255, 235, 235);
-}
-
-.sp input {
-  background-color: rgb(235, 235, 255);
-}
-
-.begin_session {
-  float: right;
-  width: 25%;
-  border: 1px solid black;
-  border-radius: 5px;
-  font-size: medium;
-  vertical-align: top;
-  background-color: rgb(235, 235, 235);
 }
