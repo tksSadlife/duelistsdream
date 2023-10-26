@@ -347,7 +347,7 @@ button {
   background-color: rgb(225, 255, 225);
 }
 
-.talent_button {
+/* .talent_button {
   display: block;
   text-align: center;
   margin: 0;
@@ -356,6 +356,28 @@ button {
   background-color: white;
   color: black;
   border: none;
+} */
+
+.talent_button:before{
+  content: ' ';
+}
+
+.talent_button:hover{
+  background-position: 0;
+  background-color: white;
+}
+
+.talent_button{
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Ambition_Avarice/images/d20.png"); 
+  background-size: 26px 26px;
+  width: 20px;
+  height: 26px;
+  background-repeat: no-repeat;
+  border-style: none;
+  background-color: transparent;
+  margin-left: 10px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 input::-webkit-outer-spin-button,
