@@ -35,22 +35,22 @@ button {
   background-color: white;
   display: inline-block;
   vertical-align: top;
-  width: 208px;
-  margin-right: 45px;
+  width: 215px;
+  margin-right: 30px;
 }
 
 .top_mid {
   background-color: white;
   display: inline-block;
   vertical-align: top;
-  width: 230px;
-  margin-right: 45px;
+  width: 280px;
+  margin-right: 30px;
 }
 
 .top_right {
   background-color: white;
   display: inline-block;
-  width: 300px;
+  width: 275px;
 }
 
 /* TOP LEFT: VITALITY */
@@ -71,24 +71,29 @@ button {
 .vitality span {
   vertical-align: middle;
   display: inline-block;
-  border-left: 1px solid black;
 }
 
 .vitality .max_value {
   font-size: large;
-  width: 60px;
+  width: 50px;
 }
 
 .vitality .add_max_button {
   width: 30px;
   background-color: rgb(255, 225, 225);
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .vitality .max_count {
-  width: 25px;
+  width: 15px;
   text-align: center;
   font-size: small;
+  border-left: 1px solid black;
+  padding-left: 5px;
+}
+
+.count_maximum {
+  width: 25px;
 }
 
 /* TOP MID: STATS */
@@ -114,6 +119,7 @@ button {
   height: 100%;
   font-size: medium;
   vertical-align: middle;
+  text-align: right;
 }
 
 .stat button {
@@ -128,6 +134,12 @@ button {
   text-align: center;
   font-size: small;
   border-left: 1px solid black;
+}
+
+.percent {
+  display: inline-block;
+  margin-right: 5px;
+  width: 10px;
 }
 
 /* TOP RIGHT: LEVEL */

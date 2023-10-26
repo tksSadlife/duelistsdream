@@ -6,11 +6,11 @@
             <div>
                 <h3> Health </h3>
                 <div class="vitality">
-                    <input name="attr_current_health" type="text" value="450" /><span class="max_value" name="attr_max_health"></span><button class="add_max_button" name="act_add_max_health" type="action"> +150 </button><span class="max_count" name="attr_health_count"></span>
+                    <input name="attr_current_health" type="text" value="450" /><span class="max_value" name="attr_max_health"></span><button class="add_max_button" name="act_add_max_health" type="action"> +150 </button><span class="max_count" name="attr_health_count"></span><span class="count_maximum">(13)</span>
                 </div>
                 <h3> Mana </h3>
                 <div class="vitality">
-                    <input name="attr_current_mana" type="text" value="5" /><span class="max_value" name="attr_max_mana"></span><button class="add_max_button" name="act_add_max_mana" type="action"> +1 </button><span class="max_count" name="attr_mana_count"></span>
+                    <input name="attr_current_mana" type="text" value="5" /><span class="max_value" name="attr_max_mana"></span><button class="add_max_button" name="act_add_max_mana" type="action"> +1 </button><span class="max_count" name="attr_mana_count"></span><span class="count_maximum">(<span name="attr_level"></span>)</span>
                 </div>
             </div>
             <div class="weapon">
@@ -22,19 +22,19 @@
         <div class="top_mid">
             <div class="stats">
                 <div class="stat">
-                    <span class="stat_name"> Strength </span><span class="stat_max" name="attr_max_strength"></span><button class="add_max_button" name="act_add_max_strength" type="action"> +7 </button><span class="max_count" name="attr_strength_count"></span>
+                    <span class="stat_name"> Strength </span><span class="stat_max" name="attr_max_strength"></span><span class="percent"></span><button class="add_max_button" name="act_add_max_strength" type="action"> +7 </button><span class="max_count" name="attr_strength_count"></span><span class="count_maximum">(13)</span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Ability Power </span><span class="stat_max" name="attr_max_ability_power"></span><button class="add_max_button" name="act_add_max_ability_power" type="action"> +1 </button><span class="max_count" name="attr_ability_power_count"></span>
+                    <span class="stat_name"> Ability Power </span><span class="stat_max" name="attr_max_ability_power"></span><span class="percent"></span><button class="add_max_button" name="act_add_max_ability_power" type="action"> +1 </button><span class="max_count" name="attr_ability_power_count"></span><span class="count_maximum"></span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Reflex </span><span class="stat_max" name="attr_max_reflex"></span><button class="add_max_button" name="act_add_max_reflex" type="action"> +3 </button><span class="max_count" name="attr_reflex_count"></span>
+                    <span class="stat_name"> Reflex </span><span class="stat_max" name="attr_max_reflex"></span><span class="percent"></span><button class="add_max_button" name="act_add_max_reflex" type="action"> +3 </button><span class="max_count" name="attr_reflex_count"></span><span class="count_maximum">(13)</span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Defense </span><span class="stat_max" name="attr_max_defense"></span><button class="add_max_button" name="act_add_max_defense" type="action"> +3 </button><span class="max_count" name="attr_defense_count"></span>
+                    <span class="stat_name"> Defense </span><span class="stat_max" name="attr_max_defense"></span><span class="percent"></span><button class="add_max_button" name="act_add_max_defense" type="action"> +3 </button><span class="max_count" name="attr_defense_count"></span><span class="count_maximum">(13)</span>
                 </div>
                 <div class="stat">
-                    <span class="stat_name"> Resistance </span><span class="stat_max" name="attr_max_resistance"></span><button class="add_max_button" name="act_add_max_resistance" type="action"> +20% </button><span class="max_count" name="attr_resistance_count"></span>
+                    <span class="stat_name"> Resistance </span><span class="stat_max" name="attr_max_resistance"></span><span class="percent">%</span><button class="add_max_button" name="act_add_max_resistance" type="action"> +20% </button><span class="max_count" name="attr_resistance_count"></span><span class="count_maximum">(<span name="attr_level"></span>)</span>
                 </div>
             </div>
         </div>
@@ -207,6 +207,84 @@
                         <button class="talent_button" name="roll_p3" type="roll" value="/me : @{character_name} used @{p3} \n/r 1d20+@{p3_level}"></button> 
                     </td>
                 </tr>
+                <tr>
+                    <td class="talent_short"> 
+                        <span class="talent_rank" name="attr_p4_rank"></span> 
+                    </td>
+                    <td class="talent_long"> 
+                        <select class="talent_name" name="attr_p4">
+                            <option value=""> Select talent </option>
+                            <option value="Assassin"> Assassin </option>
+                            <option value="Brawler"> Brawler </option>
+                            <option value="Claws&Fangs"> Claws&Fangs </option>
+                            <option value="Craft"> Craft </option>
+                            <option value="Flight"> Flight </option>
+                            <option value="Forge"> Forge </option>
+                            <option value="Furtiveness"> Furtiveness </option>
+                            <option value="Knight"> Knight </option>
+                            <option value="Lancer"> Lancer </option>
+                            <option value="Marksman"> Marksman </option>
+                            <option value="Mine"> Mine </option>
+                            <option value="Mold"> Mold </option>
+                            <option value="Movement"> Movement </option>
+                            <option value="Occupation"> Occupation </option>
+                            <option value="Parkour"> Parkour </option>
+                            <option value="Pnaevaru"> Pnaevaru </option>
+                            <option value="Sail"> Sail </option>
+                            <option value="Soldier"> Soldier </option>
+                            <option value="Swim"> Swim </option>
+                            <option value="Thief"> Thief </option>
+                            <option value="Throw&Catch"> Throw&Catch </option>
+                            <option value="Tinker"> Tinker </option>
+                            <option value="Vanguard"> Vanguard </option>
+                        </select> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <input class="talent_level" name="attr_p4_level" placeholder="X" type="number" /> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <button class="talent_button" name="roll_p4" type="roll" value="/me : @{character_name} used @{p4} \n/r 1d20+@{p4_level}"></button> 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="talent_short"> 
+                        <span class="talent_rank" name="attr_p5_rank"></span> 
+                    </td>
+                    <td class="talent_long"> 
+                        <select class="talent_name" name="attr_p5">
+                            <option value=""> Select talent </option>
+                            <option value="Assassin"> Assassin </option>
+                            <option value="Brawler"> Brawler </option>
+                            <option value="Claws&Fangs"> Claws&Fangs </option>
+                            <option value="Craft"> Craft </option>
+                            <option value="Flight"> Flight </option>
+                            <option value="Forge"> Forge </option>
+                            <option value="Furtiveness"> Furtiveness </option>
+                            <option value="Knight"> Knight </option>
+                            <option value="Lancer"> Lancer </option>
+                            <option value="Marksman"> Marksman </option>
+                            <option value="Mine"> Mine </option>
+                            <option value="Mold"> Mold </option>
+                            <option value="Movement"> Movement </option>
+                            <option value="Occupation"> Occupation </option>
+                            <option value="Parkour"> Parkour </option>
+                            <option value="Pnaevaru"> Pnaevaru </option>
+                            <option value="Sail"> Sail </option>
+                            <option value="Soldier"> Soldier </option>
+                            <option value="Swim"> Swim </option>
+                            <option value="Thief"> Thief </option>
+                            <option value="Throw&Catch"> Throw&Catch </option>
+                            <option value="Tinker"> Tinker </option>
+                            <option value="Vanguard"> Vanguard </option>
+                        </select> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <input class="talent_level" name="attr_p5_level" placeholder="X" type="number" /> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <button class="talent_button" name="roll_p5" type="roll" value="/me : @{character_name} used @{p5} \n/r 1d20+@{p5_level}"></button> 
+                    </td>
+                </tr>
             </table>
         </div>
 
@@ -337,6 +415,80 @@
                         <button class="talent_button" name="roll_m3" type="roll" value="/me : @{character_name} used @{m3} \n/r 1d20+@{m3_level}"></button> 
                     </td>
                 </tr>
+                <tr>
+                    <td class="talent_short"> 
+                        <span class="talent_rank" name="attr_m4_rank"></span> 
+                    </td>
+                    <td class="talent_long"> 
+                        <select class="talent_name" name="attr_m4">
+                            <option value=""> Select talent </option>
+                            <option value="Adaptation"> Adaptation </option>
+                            <option value="Art"> Art </option>
+                            <option value="Awareness"> Awareness </option>
+                            <option value="Brew"> Brew </option>
+                            <option value="Cook"> Cook </option>
+                            <option value="Fabled"> Fabled </option>
+                            <option value="Fauna"> Fauna </option>
+                            <option value="Flora"> Flora </option>
+                            <option value="Herbs"> Herbs </option>
+                            <option value="Maledicti"> Maledicti </option>
+                            <option value="MartialArts"> Martial Arts </option>
+                            <option value="Materials"> Materials </option>
+                            <option value="Medicine"> Medicine </option>
+                            <option value="Mystic"> Mystic </option>
+                            <option value="Occupation"> Occupation </option>
+                            <option value="Pnaevaru"> Pnaevaru </option>
+                            <option value="StasiVoli"> Stasi Voli </option>
+                            <option value="Tactics"> Tactics </option>
+                            <option value="Tools"> Tools </option>
+                            <option value="Vocabulary"> Vocabulary </option>
+                            <option value="Weaponist"> Weaponist </option>
+                        </select> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <input class="talent_level" name="attr_m4_level" placeholder="X" type="number" /> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <button class="talent_button" name="roll_m4" type="roll" value="/me : @{character_name} used @{m4} \n/r 1d20+@{m4_level}"></button> 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="talent_short"> 
+                        <span class="talent_rank" name="attr_m5_rank"></span> 
+                    </td>
+                    <td class="talent_long"> 
+                        <select class="talent_name" name="attr_m5">
+                            <option value=""> Select talent </option>
+                            <option value="Adaptation"> Adaptation </option>
+                            <option value="Art"> Art </option>
+                            <option value="Awareness"> Awareness </option>
+                            <option value="Brew"> Brew </option>
+                            <option value="Cook"> Cook </option>
+                            <option value="Fabled"> Fabled </option>
+                            <option value="Fauna"> Fauna </option>
+                            <option value="Flora"> Flora </option>
+                            <option value="Herbs"> Herbs </option>
+                            <option value="Maledicti"> Maledicti </option>
+                            <option value="MartialArts"> Martial Arts </option>
+                            <option value="Materials"> Materials </option>
+                            <option value="Medicine"> Medicine </option>
+                            <option value="Mystic"> Mystic </option>
+                            <option value="Occupation"> Occupation </option>
+                            <option value="Pnaevaru"> Pnaevaru </option>
+                            <option value="StasiVoli"> Stasi Voli </option>
+                            <option value="Tactics"> Tactics </option>
+                            <option value="Tools"> Tools </option>
+                            <option value="Vocabulary"> Vocabulary </option>
+                            <option value="Weaponist"> Weaponist </option>
+                        </select> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <input class="talent_level" name="attr_m5_level" placeholder="X" type="number" /> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <button class="talent_button" name="roll_m5" type="roll" value="/me : @{character_name} used @{m5} \n/r 1d20+@{m5_level}"></button> 
+                    </td>
+                </tr>
             </table>
         </div>
 
@@ -461,6 +613,76 @@
                         <button class="talent_button" name="roll_s3" type="roll" value="/me : @{character_name} used @{s3} \n/r 1d20+@{s3_level}"></button> 
                     </td>
                 </tr>
+                <tr>
+                    <td class="talent_short"> 
+                        <span class="talent_rank" name="attr_s4_rank"></span> 
+                    </td>
+                    <td class="talent_long"> 
+                        <select class="talent_name" name="attr_s4">
+                            <option value=""> Select talent </option>
+                            <option value="Act"> Act </option>
+                            <option value="AnimalHandling"> Animal Handling </option>
+                            <option value="Appearance"> Appearance </option>
+                            <option value="Cavalry"> Cavalry </option>
+                            <option value="Charisma"> Charisma </option>
+                            <option value="Diplomacy"> Diplomacy </option>
+                            <option value="Expression"> Expression </option>
+                            <option value="Humor"> Humor </option>
+                            <option value="Language"> Language </option>
+                            <option value="Music"> Music </option>
+                            <option value="Noble"> Noble </option>
+                            <option value="Nurse"> Nurse </option>
+                            <option value="Occupation"> Occupation </option>
+                            <option value="Pnaevaru"> Pnaevaru </option>
+                            <option value="Perception"> Perception </option>
+                            <option value="Profile"> Profile </option>
+                            <option value="Self-Control"> Self-Control </option>
+                            <option value="Teach"> Teach </option>
+                            <option value="Tribal"> Tribal </option>
+                        </select> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <input class="talent_level" name="attr_s4_level" placeholder="X" type="number" /> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <button class="talent_button" name="roll_s4" type="roll" value="/me : @{character_name} used @{s4} \n/r 1d20+@{s4_level}"></button> 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="talent_short"> 
+                        <span class="talent_rank" name="attr_s5_rank"></span> 
+                    </td>
+                    <td class="talent_long"> 
+                        <select class="talent_name" name="attr_s5">
+                            <option value=""> Select talent </option>
+                            <option value="Act"> Act </option>
+                            <option value="AnimalHandling"> Animal Handling </option>
+                            <option value="Appearance"> Appearance </option>
+                            <option value="Cavalry"> Cavalry </option>
+                            <option value="Charisma"> Charisma </option>
+                            <option value="Diplomacy"> Diplomacy </option>
+                            <option value="Expression"> Expression </option>
+                            <option value="Humor"> Humor </option>
+                            <option value="Language"> Language </option>
+                            <option value="Music"> Music </option>
+                            <option value="Noble"> Noble </option>
+                            <option value="Nurse"> Nurse </option>
+                            <option value="Occupation"> Occupation </option>
+                            <option value="Pnaevaru"> Pnaevaru </option>
+                            <option value="Perception"> Perception </option>
+                            <option value="Profile"> Profile </option>
+                            <option value="Self-Control"> Self-Control </option>
+                            <option value="Teach"> Teach </option>
+                            <option value="Tribal"> Tribal </option>
+                        </select> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <input class="talent_level" name="attr_s5_level" placeholder="X" type="number" /> 
+                    </td>
+                    <td class="talent_very_short"> 
+                        <button class="talent_button" name="roll_s5" type="roll" value="/me : @{character_name} used @{s5} \n/r 1d20+@{s5_level}"></button> 
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -498,12 +720,18 @@
 <input name="attr_p1_rank"              type="hidden"   value="0">
 <input name="attr_p2_rank"              type="hidden"   value="0">
 <input name="attr_p3_rank"              type="hidden"   value="0">
+<input name="attr_p4_rank"              type="hidden"   value="0">
+<input name="attr_p5_rank"              type="hidden"   value="0">
 <input name="attr_m1_rank"              type="hidden"   value="0">
 <input name="attr_m2_rank"              type="hidden"   value="0">
 <input name="attr_m3_rank"              type="hidden"   value="0">
+<input name="attr_m4_rank"              type="hidden"   value="0">
+<input name="attr_m5_rank"              type="hidden"   value="0">
 <input name="attr_s1_rank"              type="hidden"   value="0">
 <input name="attr_s2_rank"              type="hidden"   value="0">
 <input name="attr_s3_rank"              type="hidden"   value="0">
+<input name="attr_s4_rank"              type="hidden"   value="0">
+<input name="attr_s5_rank"              type="hidden"   value="0">
 
 <script type="text/worker">
     const data = {
@@ -593,9 +821,9 @@
         if (data.talents.rank5talents.includes(talent_name)) return 5;
     }
 
-    const names = [ "p1", "p2", "p3", 
-                    "m1", "m2", "m3",
-                    "s1", "s2", "s3"];
+    const names = [ "p1", "p2", "p3", "p4", "p5", 
+                    "m1", "m2", "m3", "m4", "m5",
+                    "s1", "s2", "s3", "s4", "s5"];
     names.forEach(name => {
         on(`change:${name}`, (e) => {
             getAttrs([name, `${name}_level`, "talent_points"], values => {
