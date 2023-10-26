@@ -79,7 +79,7 @@
             <div class="talent_top">
                 <h2> Physical </h2>
                 <div class="talent_percent">
-                    <button class="talent_rolling" name="act_roll_physical" type="roll" value="/me : @{character_name} rolled Physical (@{physical}) \n/r 1d100"><span name="attr_physical"></span><p>%</p></button>
+                    <button class="talent_rolling" name="act_roll_physical" type="roll" value="/me : @{character_name} rolled Physical \n--@{physical}--\n/r 1d100"><span name="attr_physical"></span><p>%</p></button>
                     <button class="talent_plus" name="act_add_physical" type="action"> +2% </button>
                 </div>
             </div>
@@ -293,7 +293,7 @@
             <div class="talent_top">
                 <h2> Mental </h2>
                 <div class="talent_percent">
-                    <button class="talent_rolling" name="act_roll_mental" type="roll" value="/me : @{character_name} rolled Mental (@{mental}) \n/r 1d100"><span name="attr_mental"></span><p>%</p></button>
+                    <button class="talent_rolling" name="act_roll_mental" type="roll" value="/me : @{character_name} rolled Mental \n--@{mental}--\n/r 1d100"><span name="attr_mental"></span><p>%</p></button>
                     <button class="talent_plus" name="act_add_mental" type="action"> +2% </button>
                 </div>
             </div>
@@ -497,7 +497,7 @@
             <div class="talent_top">
                 <h2> Social </h2>
                 <div class="talent_percent">
-                    <button class="talent_rolling" name="act_roll_social" type="roll" value="/me : @{character_name} rolled Social (@{social}) \n/r 1d100"><span name="attr_social"></span><p>%</p></button>
+                    <button class="talent_rolling" name="act_roll_social" type="roll" value="/me : @{character_name} rolled Social \n--@{social}--\n/r 1d100"><span name="attr_social"></span><p>%</p></button>
                     <button class="talent_plus" name="act_add_social" type="action"> +2% </button>
                 </div>
             </div>
@@ -970,13 +970,31 @@
                 });
             }
         });
-    });
+    }); 
 
     const level_up = () => {
-        getAttrs(["level"], (values) => {
+        getAttrs(["level", "max_health", "current_health", "max_mana", "current_mana", "max_strength", "max_ability_power", "max_reflex", "max_defense", "max_resistance"], (values) => {
             const new_level = int(values["level"]) + 1;
+            const new_max_health = int(values["max_health"]) + data.stats.health.per_level;
+            const new_current_health = int(values["current_health"]) + data.stats.health.per_level;
+            const new_max_mana = int(values["max_mana"]) + data.stats.mana.per_level;
+            const new_current_mana = int(values["current_mana"]) + data.stats.mana.per_level;
+            const new_strength = int(values["max_strength"]) + data.stats.strength.per_level;
+            const new_ability_power = int(values["max_ability_power"]) + data.stats.ability_power.per_level;
+            const new_reflex = int(values["max_reflex"]) + data.stats.reflex.per_level;
+            const new_defense = int(values["max_defense"]) + data.stats.defense.per_level;
+            const new_resistance = int(values["max_resistance"]) + data.stats.resistance.per_level;
             setAttrs({
-                level: new_level
+                level: new_level,
+                max_health: new_max_health,
+                current_health: new_current_health,
+                max_mana: new_max_mana,
+                current_mana: new_current_mana,
+                max_strength: new_strength,
+                max_ability_power: new_ability_power,
+                max_reflex: new_reflex,
+                max_defense: new_defense,
+                max_resistance: new_resistance
             });
         });
     }
