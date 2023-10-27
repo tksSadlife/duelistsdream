@@ -62,11 +62,11 @@
                 </div>
                 <div class="ad">
                     <span> Adaptive Development </span>
-                    <input name="attr_adaptive_development" type="number" value="5" />
+                    <input name="attr_adaptive_development" type="number" value="0" />
                 </div>
                 <div class="sp">
                     <span> Skill Points </span>
-                    <input name="attr_skill_points" type="number" value="2" />
+                    <input name="attr_skill_points" type="number" value="0" />
                 </div>
             </div>
 
@@ -687,6 +687,9 @@
         </div>
     </div>
 
+    <br />
+    <span name="attr_traits"></span>
+
 </div>
 
 <input name="attr_level"                type="hidden"   value="1">
@@ -701,11 +704,11 @@
 <input name="attr_health_count"         type="hidden"   value="0">
 <input name="attr_mana_count"           type="hidden"   value="0">
 
-<input name="attr_max_strength"             type="hidden"   value="25">
-<input name="attr_max_ability_power"        type="hidden"   value="0">
-<input name="attr_max_reflex"               type="hidden"   value="15">
-<input name="attr_max_defense"              type="hidden"   value="15">
-<input name="attr_max_resistance"           type="hidden"   value="0">
+<input name="attr_max_strength"         type="hidden"   value="25">
+<input name="attr_max_ability_power"    type="hidden"   value="0">
+<input name="attr_max_reflex"           type="hidden"   value="15">
+<input name="attr_max_defense"          type="hidden"   value="15">
+<input name="attr_max_resistance"       type="hidden"   value="0">
 
 <input name="attr_strength_count"       type="hidden"   value="0">
 <input name="attr_ability_power_count"  type="hidden"   value="0">
@@ -732,6 +735,9 @@
 <input name="attr_s3_rank"              type="hidden"   value="0">
 <input name="attr_s4_rank"              type="hidden"   value="0">
 <input name="attr_s5_rank"              type="hidden"   value="0">
+
+<input name="attr_talents"              type="hidden"   value="">
+<input name="attr_traits"               type="hidden"   value="">
 
 <script type="text/worker">
     const data = {
@@ -815,10 +821,11 @@
 
     const get_rank = (talent_name) => {
         if (data.talents.rank1talents.includes(talent_name)) return 1;
-        if (data.talents.rank2talents.includes(talent_name)) return 2;
-        if (data.talents.rank3talents.includes(talent_name)) return 3;
-        if (data.talents.rank4talents.includes(talent_name)) return 4;
-        if (data.talents.rank5talents.includes(talent_name)) return 5;
+        else if (data.talents.rank2talents.includes(talent_name)) return 2;
+        else if (data.talents.rank3talents.includes(talent_name)) return 3;
+        else if (data.talents.rank4talents.includes(talent_name)) return 4;
+        else if (data.talents.rank5talents.includes(talent_name)) return 5;
+        else return 0;
     }
 
     const names = [ "p1", "p2", "p3", "p4", "p5", 
@@ -826,15 +833,16 @@
                     "s1", "s2", "s3", "s4", "s5"];
     names.forEach(name => {
         on(`change:${name}`, (e) => {
-            getAttrs([name, `${name}_level`, "talent_points"], values => {
+            getAttrs([name, `${name}_level`, "talent_points", "talents"], values => {
                 const name_base = values[name];
                 const name_rank = get_rank(name_base);
-
-                setAttrs({
-                    [`${name}_rank`]: name_rank,
-                });
+                let talent_list = values["talents"];
+                if (talent_list === "") {
+                    talent_list = [];
+                }
 
                 if (e.previousValue === e.newValue) {
+                    talent_list.push(name_base)
                     setAttrs({
                         [`${name}_level`]: 0,
                     });
@@ -843,11 +851,18 @@
                     const rank_diff = prev_name_rank - name_rank;
                     cost = rank_diff * values[`${name}_level`];
                     const new_tp = int(values["talent_points"]) + cost;
+
+                    const index = talent_list.indexOf(e.previousValue);
+                    talent_list[index] = e.newValue;
                     
                     setAttrs({
-                        talent_points: new_tp
+                        talent_points: new_tp,
                     });
                 };
+                setAttrs({
+                    [`${name}_rank`]: name_rank,
+                    talents: talent_list,
+                });
             });
         });
 
@@ -862,6 +877,132 @@
                 setAttrs({
                     talent_points: new_talent_points
                 });
+            });
+        });
+    });
+
+    const trait_list = [
+        {name: "Adventurer",        steps: [3,4,5],         count: 0},
+        {name: "Ambitious",         steps: [3,6,9],         count: 0},
+        {name: "Benevolent",        steps: [3,6,9],         count: 0},
+        {name: "Blacksmith",        steps: [2,3,4],         count: 0},
+        {name: "Caretaker",         steps: [2,3,4,5],       count: 0},
+        {name: "Cartograph",        steps: [2,3,4,5,6,7],   count: 0},
+        {name: "Chaotic",           steps: [2,4,5],         count: 0},
+        {name: "Corrupt",           steps: [2,3,4],         count: 0},
+        {name: "Druid",             steps: [3,5,7],         count: 0},
+        {name: "Evil",              steps: [3,5],           count: 0},
+        {name: "Expert",            steps: [3,5,7],         count: 0},
+        {name: "Forecaster",        steps: [1],             count: 0},
+        {name: "Hypocrite",         steps: [2,3,4],         count: 0},
+        {name: "Idol",              steps: [3,6],           count: 0},
+        {name: "Inquisitive",       steps: [2,4,6],         count: 0},
+        {name: "Lawful",            steps: [2,4,6],         count: 0},
+        {name: "Magus",             steps: [3],             count: 0},
+        {name: "Mastermind",        steps: [1],             count: 0},
+        {name: "Pioneer",           steps: [3,5],           count: 0},
+        {name: "Prejudice",         steps: [1],             count: 0},
+        {name: "Pride",             steps: [3,5,7,9],       count: 0},
+        {name: "Race.Human",        steps: [1],             count: 0},
+        {name: "Race.Pnaevaru",     steps: [1],             count: 0},
+        {name: "Race.Maledicti",    steps: [1,2,3,4,5],     count: 0},
+        {name: "Socialite",         steps: [2,4,6],         count: 0},
+        {name: "Specialist",        steps: [1],             count: 0},
+        {name: "Tradesman",         steps: [2,4,6],         count: 0},
+        {name: "Wanderer",          steps: [2,3,4],         count: 0},
+        {name: "Weapons.Master",    steps: [3,5],           count: 0},
+    ];
+
+    const talent_trait = [ 
+        {name: "Art",               rank: 1,    traits: ["Pride", "Tradesman"]}, 
+        {name: "Cavalry",           rank: 1,    traits: ["Ambitious", "Caretaker"]}, 
+        {name: "Herbs",             rank: 1,    traits: ["Chaotic", "Druid"]}, 
+        {name: "Humor",             rank: 1,    traits: ["Idol", "Socialite"]}, 
+        {name: "Materials",         rank: 1,    traits: ["Lawful", "Adventurer"]}, 
+        {name: "Mine",              rank: 1,    traits: ["Benevolent", "Adventurer"]}, 
+        {name: "Mold",              rank: 1,    traits: ["Ambitious", "Blacksmith"]}, 
+        {name: "Music",             rank: 1,    traits: ["Idol", "Tradesman"]}, 
+        {name: "Mystic",            rank: 1,    traits: ["Evil", "Cartograph"]}, 
+        {name: "Sail",              rank: 1,    traits: ["Inquisitive", "Expert"]}, 
+        {name: "Swim",              rank: 1,    traits: ["Benevolent", "Wanderer"]}, 
+        {name: "Tinker",            rank: 1,    traits: ["Pride", "Druid"]}, 
+        {name: "Vocabulary",        rank: 1,    traits: ["Inquisitive", "Cartograph"]},
+        {name: "Act",               rank: 2,    traits: ["Hypocrite", "Socialite"]}, 
+        {name: "Brawler",           rank: 2,    traits: ["Evil", "Blacksmith"]}, 
+        {name: "Brew",              rank: 2,    traits: ["Inquisitive", "Druid"]}, 
+        {name: "Claws&Fangs",       rank: 2,    traits: ["Race.Maledicti", "Magus"]}, 
+        {name: "Cook",              rank: 2,    traits: ["Lawful", "Caretaker"]}, 
+        {name: "Flight",            rank: 2,    traits: ["Race.Maledicti", "Wanderer"]}, 
+        {name: "Flora",             rank: 2,    traits: ["Ambitious", "Cartograph"]}, 
+        {name: "Language",          rank: 2,    traits: ["Ambitious", "Cartograph"]}, 
+        {name: "Maledicti",         rank: 2,    traits: ["Corrupt", "Pioneer"]}, 
+        {name: "Noble",             rank: 2,    traits: ["Pride", "Tradesman"]}, 
+        {name: "Throw&Catch",       rank: 2,    traits: ["Benevolent", "Pioneer"]}, 
+        {name: "Tools",             rank: 2,    traits: ["Chaotic", "Adventurer"]}, 
+        {name: "Vanguard",          rank: 2,    traits: ["Benevolent", "Weapons.Master"]},
+        {name: "AnimalHandling",    rank: 3,    traits: ["Chaotic", "Caretaker"]}, 
+        {name: "Appearance",        rank: 3,    traits: ["Hypocrite", "Expert"]}, 
+        {name: "Craft",             rank: 3,    traits: ["Idol", "Pioneer"]}, 
+        {name: "Diplomacy",         rank: 3,    traits: ["Corrupt", "Tradesman"]}, 
+        {name: "Fabled",            rank: 3,    traits: ["Race.Maledicti", "Cartograph"]}, 
+        {name: "Fauna",             rank: 3,    traits: ["Pride", "Cartograph"]}, 
+        {name: "Forge",             rank: 3,    traits: ["Benevolent", "Blacksmith"]}, 
+        {name: "Marksman",          rank: 3,    traits: ["Pride", "Weapons.Master"]}, 
+        {name: "Medicine",          rank: 3,    traits: ["Benevolent", "Druid"]}, 
+        {name: "Movement",          rank: 3,    traits: ["Ambitious", "Wanderer"]}, 
+        {name: "Profile",           rank: 3,    traits: ["Inquisitive", "Socialite"]}, 
+        {name: "Soldier",           rank: 3,    traits: ["Lawful", "Weapons.Master"]}, 
+        {name: "Weaponist",         rank: 3,    traits: ["Evil", "Expert"]},
+        {name: "Awareness",         rank: 4,    traits: ["Lawful", "Druid"]},
+        {name: "Charisma",          rank: 4,    traits: ["Hypocrite", "Pioneer"]}, 
+        {name: "Expression",        rank: 4,    traits: ["Pride", "Socialite"]}, 
+        {name: "Furtiveness",       rank: 4,    traits: ["Corrupt", "Adventurer"]}, 
+        {name: "Lancer",            rank: 4,    traits: ["Ambitious", "Weapons.Master"]}, 
+        {name: "Nurse",             rank: 4,    traits: ["Benevolent", "Caretaker"]}, 
+        {name: "Occupation",        rank: 4,    traits: ["Lawful", "Tradesman"]}, 
+        {name: "Parkour",           rank: 4,    traits: ["Chaotic", "Wanderer"]}, 
+        {name: "Perception",        rank: 4,    traits: ["Inquisitive", "Magus"]}, 
+        {name: "Self-Control",      rank: 4,    traits: ["Idol", "Blacksmith"]}, 
+        {name: "StasiVoli",         rank: 4,    traits: ["Race.Maledicti", "Expert"]}, 
+        {name: "Thief",             rank: 4,    traits: ["Evil", "Adventurer"]},
+        {name: "Adaptation",        rank: 5,    traits: ["Pride", "Mastermind"]}, 
+        {name: "Assassin",          rank: 5,    traits: ["Evil", "Prejudice", "Weapons.Master"]}, 
+        {name: "Knight",            rank: 5,    traits: ["Idol", "Prejudice", "Weapons.Master"]}, 
+        {name: "MartialArts",       rank: 5,    traits: ["Chaotic", "Expert"]}, 
+        {name: "Breath",            rank: 5,    traits: ["Race.Pnaevaru", "Specialist"]}, 
+        {name: "Cogium",            rank: 5,    traits: ["Race.Pnaevaru", "Specialist"]}, 
+        {name: "Might",             rank: 5,    traits: ["Race.Pnaevaru", "Specialist"]}, 
+        {name: "Nullify",           rank: 5,    traits: ["Race.Pnaevaru", "Specialist"]}, 
+        {name: "Oblige",            rank: 5,    traits: ["Race.Pnaevaru", "Specialist"]}, 
+        {name: "Radiance",          rank: 5,    traits: ["Race.Pnaevaru", "Specialist"]}, 
+        {name: "Tactics",           rank: 5,    traits: ["Ambitious", "Magus", "Forecaster"]}, 
+        {name: "Teach",             rank: 5,    traits: ["Benevolent", "Socialite"]}, 
+        {name: "Tribal",            rank: 5,    traits: ["Race.Maledicti", "Race.Pnaevaru", "Tradesman"]}, 
+        {name: "Pnaevaru",          rank: 5,    traits: ["Race.Pnaevaru", "Specialist"]}
+    ];
+
+    on('sheet:opened change:talents', (e) => {
+        for (const trait of trait_list) {
+            trait.count = 0;
+        }
+        getAttrs(["talents", "traits"], (values) => {
+            for (const talent of values["talents"]) {
+                const foundTalent = talent_trait.find((item) => item.name === talent);
+                if (foundTalent) {
+                  const traits = foundTalent.traits;
+                  for (const trait of traits) {
+                    trait_list.find(it => it.name === trait).count++;
+                  }
+                }
+            };
+            const trait_arr = [];
+            for (const trait of trait_list) {
+                if (trait.count > 0) {
+                    trait_arr.push(trait.name + "(" + trait.count + ")");
+                }
+            };
+            setAttrs({
+                traits: trait_arr,
             });
         });
     });
