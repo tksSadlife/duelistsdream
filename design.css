@@ -4,6 +4,7 @@ span {
   background-color: white;
   padding: 1px;
   text-align: center;
+  vertical-align: middle;
 }
 
 p {
@@ -84,7 +85,7 @@ button {
   margin-right: 5px;
 }
 
-.vitality .max_count {
+.max_count {
   width: 15px;
   text-align: center;
   font-size: small;
@@ -93,7 +94,7 @@ button {
 }
 
 .count_maximum {
-  width: 25px;
+  width: 20px;
 }
 
 /* TOP MID: STATS */
@@ -245,17 +246,41 @@ button {
 .talent_top {
   border: 1px solid black;
   vertical-align: middle;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
+}
+
+.talent_critical {
+  display: block;
+  float: right;
+  margin-right: 5px;
+  border-bottom: 1px solid black;
+  padding-bottom: 3px;
+}
+
+.talent_critical span {
+  font-size: medium;
+}
+
+.talent_critical .max_count {
+  margin-left: 5px;
+  font-size: small;
+}
+
+.talent_critical .count_maximum {
+  font-size: small;
 }
 
 .talent_top h2 {
   display: inline-block;
   margin-left: 5px;
+  font-size: large;
+  width: 75px;
 }
 
 .talent_percent {
   float: right;
-  margin-right: 10px;
+  margin-right: 5px;
+  height: 100%;
 }
 
 .talent_percent span {
@@ -264,12 +289,22 @@ button {
   padding: 5px 0;
 }
 
+.talent_percent .max_count {
+  font-size: small;
+  margin-left: 5px;
+}
+
+.talent_percent .count_maximum {
+  font-size: small;
+}
+
 .talent_percent p {
   font-size: large;
 }
 
 .talent_rolling {
-  background-color: rgb(225, 225, 225);
+  display: inline-block;
+  width: 62px;
   border: none;
   border-radius: 0;
   padding-top: 3px;
@@ -280,18 +315,23 @@ button {
 }
 
 .talent_plus {
-  margin-left: 10px;
   display: inline-table;
   padding: auto;
   vertical-align: middle;
   background-color: rgb(255, 225, 225);
+  margin-left: 5px;
 }
 
 .talents_category {
   display: inline-block;
   background-color: white;
-  width: 30%;
-  margin-right: 2%;
+  width: 267px;
+  margin-right: 10px;
+}
+
+.talents_category table {
+  display: block;
+  margin-top: 40px;
 }
 
 .bottom_row th {

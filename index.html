@@ -80,12 +80,14 @@
                 <h2> Physical </h2>
                 <div class="talent_percent">
                     <button class="talent_rolling" name="act_roll_physical" type="roll" value="/me : @{character_name} rolled Physical \n--@{physical}--\n/r 1d100"><span name="attr_physical"></span><p>%</p></button>
-                    <button class="talent_plus" name="act_add_physical" type="action"> +2% </button>
+                    <button class="talent_plus" name="act_add_physical" type="action"> +2.5% </button><span class="max_count" name="attr_physical_count"></span><span class="count_maximum">(13)</span>
                 </div>
+            </div>
+            <div class="talent_critical">
+                <span name="attr_physical_crit"></span><span>%</span><button class="talent_plus" name="act_add_physical_crit" type="action"> +4% </button><span class="max_count" name="attr_physical_crit_count"></span><span class="count_maximum">(13)</span>
             </div>
             <table>
                 <tr>
-                    <!-- <th> Rank&nbsp&nbsp </th> -->
                     <th></th>
                     <th> Name </th>
                     <th> Level </th>
@@ -294,8 +296,11 @@
                 <h2> Mental </h2>
                 <div class="talent_percent">
                     <button class="talent_rolling" name="act_roll_mental" type="roll" value="/me : @{character_name} rolled Mental \n--@{mental}--\n/r 1d100"><span name="attr_mental"></span><p>%</p></button>
-                    <button class="talent_plus" name="act_add_mental" type="action"> +2% </button>
+                    <button class="talent_plus" name="act_add_mental" type="action"> +2.5% </button><span class="max_count" name="attr_mental_count"></span><span class="count_maximum">(13)</span>
                 </div>
+            </div>
+            <div class="talent_critical">
+                <span name="attr_mental_crit"></span><span>%</span><button class="talent_plus" name="act_add_mental_crit" type="action"> +4% </button><span class="max_count" name="attr_mental_crit_count"></span><span class="count_maximum">(13)</span>
             </div>
             <table>
                 <tr>
@@ -498,8 +503,11 @@
                 <h2> Social </h2>
                 <div class="talent_percent">
                     <button class="talent_rolling" name="act_roll_social" type="roll" value="/me : @{character_name} rolled Social \n--@{social}--\n/r 1d100"><span name="attr_social"></span><p>%</p></button>
-                    <button class="talent_plus" name="act_add_social" type="action"> +2% </button>
+                    <button class="talent_plus" name="act_add_social" type="action"> +2.5% </button><span class="max_count" name="attr_social_count"></span><span class="count_maximum">(13)</span>
                 </div>
+            </div>
+            <div class="talent_critical">
+                <span name="attr_social_crit"></span><span>%</span><button class="talent_plus" name="act_add_social_crit" type="action"> +4% </button><span class="max_count" name="attr_social_crit_count"></span><span class="count_maximum">(13)</span>
             </div>
             <table>
                 <tr>
@@ -716,9 +724,21 @@
 <input name="attr_defense_count"        type="hidden"   value="0">
 <input name="attr_resistance_count"     type="hidden"   value="0">
 
-<input name="attr_physical"             type="hidden"   value="10">
-<input name="attr_mental"               type="hidden"   value="10">
-<input name="attr_social"               type="hidden"   value="10">
+<input name="attr_physical"             type="hidden"   value="10.0">
+<input name="attr_mental"               type="hidden"   value="10.0">
+<input name="attr_social"               type="hidden"   value="10.0">
+
+<input name="attr_physical_count"       type="hidden"   value="0">
+<input name="attr_mental_count"         type="hidden"   value="0">
+<input name="attr_social_count"         type="hidden"   value="0">
+
+<input name="attr_physical_crit"        type="hidden"   value="5">
+<input name="attr_mental_crit"          type="hidden"   value="5">
+<input name="attr_social_crit"          type="hidden"   value="5">
+
+<input name="attr_physical_crit_count"  type="hidden"   value="0">
+<input name="attr_mental_crit_count"    type="hidden"   value="0">
+<input name="attr_social_crit_count"    type="hidden"   value="0">
 
 <input name="attr_p1_rank"              type="hidden"   value="0">
 <input name="attr_p2_rank"              type="hidden"   value="0">
@@ -1008,6 +1028,7 @@
     });
 
     const int = score => parseInt(score, 10) || 0;
+    const float = score => parseFloat(score, 10) || 0;
 
     on('clicked:add_max_health clicked:add_max_mana clicked:add_max_strength clicked:add_max_ability_power clicked:add_max_reflex clicked:add_max_defense clicked:add_max_resistance', async(event) => {
         const stat_kind_max = event.triggerName.substring(12);
@@ -1043,13 +1064,33 @@
 
     on('clicked:add_physical clicked:add_mental clicked:add_social', async(event) => {
         const talent_kind = event.triggerName.substring(12);
-        getAttrs([`${talent_kind}`, "adaptive_development"], (values) => {
-            if (values["adaptive_development"] > 0) {
-                const tal = int(values[`${talent_kind}`]);
-                const new_tal = tal + 2;
+        getAttrs([`${talent_kind}`, "adaptive_development", `${talent_kind}_count`], (values) => {
+            if (values["adaptive_development"] > 0 && int(values[`${talent_kind}_count`]) < 13) {
+                const tal = float(values[`${talent_kind}`]);
+                const new_tal = tal + 2.5;
                 const new_ad = int(values["adaptive_development"]) - 1;
+                const new_count = int(values[`${talent_kind}_count`]) + 1;
                 setAttrs({
                     [talent_kind]: new_tal,
+                    [`${talent_kind}_count`]: new_count,
+                    adaptive_development: new_ad
+                });
+            }
+            
+        });
+    });
+
+    on('clicked:add_physical_crit clicked:add_mental_crit clicked:add_social_crit', async(event) => {
+        const talent_kind = event.triggerName.substring(12);
+        getAttrs([`${talent_kind}`, "adaptive_development", `${talent_kind}_count`], (values) => {
+            if (values["adaptive_development"] > 0 && int(values[`${talent_kind}_count`]) < 13) {
+                const tal = int(values[`${talent_kind}`]);
+                const new_tal = tal + 4;
+                const new_ad = int(values["adaptive_development"]) - 1;
+                const new_count = int(values[`${talent_kind}_count`]) + 1;
+                setAttrs({
+                    [talent_kind]: new_tal,
+                    [`${talent_kind}_count`]: new_count,
                     adaptive_development: new_ad
                 });
             }
