@@ -218,6 +218,7 @@ input {
   border: var(--border_width) solid var(--border-color);
   text-align: center;
   border-radius: 0;
+  width: auto;
 }
 
 input::placeholder {
@@ -277,6 +278,7 @@ span {
 textarea {
   background-color: var(--background_color);
   color: var(--font_color);
+  resize: none;
 }
 
 /* OFTEN USED */
@@ -345,6 +347,16 @@ textarea {
 .flex {
   display: flex;
 }
+
+.column {
+  flex-direction: column;
+}
+
+.justify_content {
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .interaction_border {
   --b: var(--border_width);   /* thickness of the border */
@@ -892,7 +904,6 @@ textarea {
 .consumables_left textarea {
   width: calc(100% - var(--padding_big));
   margin-bottom: var(--padding_big);
-  resize: none;
   flex: 1;
 }
 
@@ -1501,6 +1512,7 @@ button.sheet-toggle {
   width: 100%;
   background-color: var(--background_color);
   color: var(--font_color);
+  background-color: var(--stat_background);
 }
 
 .augments textarea {
@@ -1584,6 +1596,7 @@ button.sheet-toggle {
   margin-left: var(--padding_medium);
   padding: var(--padding_medium);
   min-height: 64px;
+  background-color: var(--stat_background);
 }
 
 .act_trait_text span {
@@ -1605,7 +1618,7 @@ button.sheet-toggle {
 }
 
 .bonus_trait {
-  background-color: var(--background_color);
+  background-color: var(--stat_background);
   color: var(--font_color);
   width: 100%;
   margin-bottom: var(--padding_big);
@@ -1716,12 +1729,6 @@ button.sheet-toggle {
   padding-bottom: var(--padding_big);
 }
 
-.armorclass {
-  text-align: right;
-  font-size: 16px;
-  line-height: 1;
-}
-
 .item_icon {
   width: 56px;
   height: 56px;
@@ -1737,6 +1744,21 @@ button.sheet-toggle {
 
 .armor_class {
   text-align: right;
+  align-items: center;
+  margin-bottom: var(--padding_medium);
+}
+
+.armor_class span {
+  color: var(--armor_class);
+}
+
+.armor_class input {
+  border-color: var(--armor_class);
+}
+
+.armor_border {
+  border: var(--border_width) solid var(--armor_class);
+  margin-right: var(--padding_medium);
 }
 
 .magic_class {
@@ -1744,18 +1766,13 @@ button.sheet-toggle {
   margin-bottom: var(--padding_big);
 }
 
-.armor_class span {
-  color: var(--armor_class);
-}
-
 .magic_class span {
   color: var(--magic_class);
   margin-bottom: var(--padding_big);
 }
 
-.armor_border {
-  border: var(--border_width) solid var(--armor_class);
-  margin-right: var(--padding_medium);
+.magic_class input {
+  border-color: var(--magic_class);
 }
 
 .magic_border {
@@ -1775,6 +1792,14 @@ button.sheet-toggle {
 
 .inventory_skills h6 {
   margin-bottom: var(--padding_big);
+}
+
+[data-groupname="repeating_inventory"] .repcontrol_add::after {
+  content: " Item";
+}
+
+[data-groupname="repeating_unequipped"] .repcontrol_add::after {
+  content: " Skill";
 }
 
 .inventory_item {
@@ -1799,6 +1824,533 @@ button.sheet-toggle {
   background-color: var(--background_color);
   border: none;
   border-bottom: var(--border_width) solid var(--border-color);
+}
+
+/* ABILITIES & CO */
+
+.abilities_co_area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.abilities_co_area h6 {
+  margin-bottom: var(--padding_medium);
+}
+
+/* KEYWORDS */
+
+.keywords_area {
+  width: 200px;
+  padding: var(--padding_medium);
+}
+
+.keywords_block {
+  display: block;
+  background-color: var(--stat_background);
+  border-bottom: 1px solid var(--border-color);
+  /* margin-bottom: calc((-2) * var(--padding_big)); */
+}
+
+.keywords_flag[value="○"] ~ .keywords_block {
+  display: none;
+}
+
+.mb {
+  margin-bottom: var(--padding_medium);
+}
+
+.mbBig {
+  margin-bottom: var(--padding_big);
+}
+
+.keywords_pool {
+  width: 100%;
+  margin-bottom: var(--padding_big);
+}
+
+.kp_loot, 
+.kp_swimDive,
+.kp_presence,
+.kp_magic,
+.kp_combat,
+.kp_weapon,
+.kp_traitExpert {
+  display: none;
+}
+
+.kp_loot_flag[value="✓"]         ~ .kp_loot,
+.kp_swimDive_flag[value="✓"]     ~ .kp_swimDive,
+.kp_presence_flag[value="✓"]     ~ .kp_presence,
+.kp_magic_flag[value="✓"]        ~ .kp_magic,
+.kp_combat_flag[value="✓"]       ~ .kp_combat,
+.kp_weapon_flag[value="✓"]       ~ .kp_weapon,
+.kp_traitExpert_flag[value="✓"]  ~ .kp_traitExpert {
+  display: block;
+}
+
+.keywords_pool_input {
+  background-color: var(--background_color);
+  widows: 100%;
+}
+
+.keywords_element {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border_radius);
+  padding: var(--padding_small);
+}
+
+.keywords_element input {
+  border: none;
+  width: 100%;
+}
+
+.keywords_element textarea {
+  width: calc(100% - var(--padding_big));
+  border: none;
+  border-top: 1px solid var(--border-color);
+  height: 48px;
+  margin-top: var(--padding_small);
+  margin-bottom: -4px;
+}
+
+.keywords_element span {
+  display: block;
+  text-align: center;
+}
+
+.keywords_pool_selection div {
+  margin-bottom: var(--padding_big);
+}
+
+.keywords_pool_selection div:last-child {
+  margin-bottom: 0;
+}
+
+.keywords_pool_selection button {
+  width: 10px;
+}
+
+.noRep ~ .repcontrol {
+  display: none; 
+}
+
+.lootDescription,
+.swimDiveDescription,
+.presenceDescription,
+.magicDescription,
+.combatDescription,
+.otherDescription,
+.weaponDescription,
+.traitExpertDescription {
+  display: block;
+}
+
+.lootNoDescription,
+.swimDiveNoDescription,
+.presenceNoDescription,
+.magicNoDescription,
+.combatNoDescription,
+.otherNoDescription,
+.weaponNoDescription,
+.traitExpertNoDescription {
+  display: none;
+}
+
+.lootDescriptionFlag[value="▼"]         ~ .lootDescription,
+.swimDiveDescriptionFlag[value="▼"]     ~ .swimDiveDescription,
+.presenceDescriptionFlag[value="▼"]     ~ .presenceDescription,
+.magicDescriptionFlag[value="▼"]        ~ .magicDescription,
+.combatDescriptionFlag[value="▼"]       ~ .combatDescription,
+.otherDescriptionFlag[value="▼"]        ~ .otherDescription,
+.weaponDescriptionFlag[value="▼"]       ~ .weaponDescription,
+.traitExpertDescriptionFlag[value="▼"]  ~ .traitExpertDescription {
+  display: none;
+}
+
+.lootDescriptionFlag[value="▼"]         ~ .lootNoDescription,
+.swimDiveDescriptionFlag[value="▼"]     ~ .swimDiveNoDescription,
+.presenceDescriptionFlag[value="▼"]     ~ .presenceNoDescription,
+.magicDescriptionFlag[value="▼"]        ~ .magicNoDescription,
+.combatDescriptionFlag[value="▼"]       ~ .combatNoDescription,
+.otherDescriptionFlag[value="▼"]        ~ .otherNoDescription,
+.weaponDescriptionFlag[value="▼"]       ~ .weaponNoDescription,
+.traitExpertDescriptionFlag[value="▼"]  ~ .traitExpertNoDescription {
+  display: block;
+}
+
+/* PERMANENT KEYWORDS */
+
+.keywords_permanent {
+  padding: var(--padding_big);
+  background-color: var(--stat_background);
+  border: 1px solid var(--border-color);
+}
+
+.heading {
+  text-align: center;
+}
+
+/* ABILITIES */
+
+.abilitiesArea {
+  flex: 1;
+  border-left: 3px solid var(--border-color);
+  border-right: 3px solid var(--border-color);
+}
+
+.abilitiesTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.abilitiesTabOne {
+  width: 80px;
+  text-align: center;
+  padding: var(--padding_medium);
+  border: 1px solid var(--border-color);
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0 var(--border_radius) 0 0;
+}
+
+.abilitiesTabTwo {
+  width: 80px;
+  text-align: center;
+  padding: var(--padding_medium);
+  border: 1px solid var(--border-color);
+  border-bottom: 0;
+  border-right: 0;
+  border-radius: var(--border_radius) 0 0 0;
+}
+
+.abilitiesContent {
+  padding: var(--padding_big);
+  border-top: 1px solid var(--border-color);
+}
+
+.ability {
+
+}
+
+.abilityTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.abilityTab {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+  padding: var(--padding_medium);
+}
+
+.abilityTab input {
+  border: none;
+  background-color: var(--stat_background);
+}
+
+.abilityTab select {
+  margin-right: var(--padding_medium);
+}
+
+.abilityTabFiller {
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.abilityBottom {
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-radius: 0 0 var(--border_radius) var(--border_radius);
+  padding: var(--padding_small);
+}
+
+.abilityName {
+  flex: 1;
+  text-align: start;
+  margin-right: var(--padding_small);
+  background-color: var(--stat_background);
+}
+
+.abilityCost {
+  margin-right: var(--padding_small);
+  border: 1px solid var(--border-color);
+  background-color: var(--stat_background);
+}
+
+.abilityCooldown {
+  margin-right: var(--padding_small);
+  border: 1px solid var(--border-color);
+  background-color: var(--stat_background);
+}
+
+.abilityHitChance {
+  border: 1px solid var(--border-color);
+  background-color: var(--stat_background);
+}
+
+.abilityBottom textarea {
+  width: calc(100% - var(--padding_big));
+  height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 var(--border_radius) var(--border_radius);
+  margin-top: var(--padding_small);
+  background-color: var(--stat_background);
+  margin-bottom: -4px;
+}
+
+/* COMMANDS */
+
+.commands_rhetorics_area {
+  width: 200px;
+  padding: var(--padding_medium);
+}
+
+.commands_block {
+  display: block;
+  background-color: var(--stat_background);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: calc(3 * var(--padding_big));
+}
+
+.commands_flag[value="○"] ~ .commands_block {
+  display: none;
+}
+
+.cp_animal, 
+.cp_person {
+  display: none;
+}
+
+.cp_animal_flag[value="✓"] ~ .cp_animal,
+.cp_person_flag[value="✓"] ~ .cp_person {
+  display: block;
+}
+
+.animalDescription,
+.personDescription {
+  display: block;
+}
+
+.animalNoDescription,
+.personNoDescription {
+  display: none;
+}
+
+.animalDescriptionFlag[value="▼"] ~ .animalDescription,
+.personDescriptionFlag[value="▼"] ~ .personDescription {
+  display: none;
+}
+
+.animalDescriptionFlag[value="▼"] ~ .animalNoDescription,
+.personDescriptionFlag[value="▼"] ~ .personNoDescription {
+  display: block;
+}
+
+/* RHETORICS */
+
+.rhetorics_block {
+  display: block;
+  background-color: var(--stat_background);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.rhetorics_flag[value="○"] ~ .rhetorics_block {
+  display: none;
+}
+
+.rp_humor, 
+.rp_music,
+.rp_persuade,
+.rp_manipulation {
+  display: none;
+}
+
+.rp_humor_flag[value="✓"]        ~ .rp_humor,
+.rp_music_flag[value="✓"]        ~ .rp_music,
+.rp_persuade_flag[value="✓"]     ~ .rp_persuade,
+.rp_manipulation_flag[value="✓"] ~ .rp_manipulation {
+  display: block;
+}
+
+.humorDescription,
+.musicDescription,
+.persuadeDescription,
+.manipulationDescription {
+  display: block;
+}
+
+.humorNoDescription,
+.musicNoDescription,
+.persuadeNoDescription,
+.manipulationNoDescription {
+  display: none;
+}
+
+.humorDescriptionFlag[value="▼"]        ~ .humorDescription,
+.musicDescriptionFlag[value="▼"]        ~ .musicDescription,
+.persuadeDescriptionFlag[value="▼"]     ~ .persuadeDescription,
+.manipulationDescriptionFlag[value="▼"] ~ .manipulationDescription {
+  display: none;
+}
+
+.humorDescriptionFlag[value="▼"]        ~ .humorNoDescription,
+.musicDescriptionFlag[value="▼"]        ~ .musicNoDescription,
+.persuadeDescriptionFlag[value="▼"]     ~ .persuadeNoDescription,
+.manipulationDescriptionFlag[value="▼"] ~ .manipulationNoDescription {
+  display: block;
+}
+
+/* IT WORKS BUT I DO NOT LIKE IT */
+
+.textColorBlue {
+  color: var(--tooltip_blue);
+}
+
+.textColorNormal {
+  color: var(--font_color);
+}
+
+.spaceAround {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* BIO INFO */
+
+.alignItems {
+  align-items: center;
+}
+
+.bioInfoColumn1 {
+  width: 200px;
+  /* border: 1px solid lightblue; */
+  padding: var(--padding_big);
+}
+
+.thickBorder {
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: calc(2 * var(--padding_big));
+  padding-bottom: var(--padding_big);
+}
+
+.bioInfoColumn1 h6 {
+  margin-bottom: var(--padding_medium);
+  font-size: small;
+}
+
+.nameHeading {
+  font-size: medium;
+}
+
+.nickname {
+  width: 66px;
+  border: none;
+  background-color: var(--stat_background);
+}
+
+.bioInfoColumn1 textarea {
+  width: calc(100% - var(--padding_big));
+  border: 1px solid var(--border-color);
+  background-color: var(--stat_background);
+}
+
+.goal {
+  width: 100%;
+  background-color: var(--stat_background);
+}
+
+/* BIO INFO 2 */
+
+.bioInfoColumn2 {
+  padding: var(--padding_big);
+  flex: 1;
+  /* border: 1px solid lightyellow; */
+}
+
+.bioInfoColumn2 h6 {
+  font-size: small;
+  margin-bottom: var(--padding_medium);
+}
+
+.centered {
+  text-align: center;
+}
+
+.bioInfoColumn2 img {
+  width: 200px;
+  margin-bottom: var(--padding_big);
+}
+
+.bioInfoColumn2 select {
+  width: auto;
+  max-width: 50%;
+}
+
+.bioInfoColumn2 input {
+  width: 100%;
+  background-color: var(--stat_background);
+}
+
+/* BIO INFO 3 */
+
+.backgroundColor {
+  background-color: var(--stat_background);
+}
+
+.bioInfoColumn3 {
+  width: 220px;
+  /* border: 1px solid lightpink; */
+  padding: var(--padding_big);
+}
+
+.bioInfoColumn3 h6 {
+  font-size: small;
+  margin-bottom: var(--padding_medium);
+}
+
+.agendaContainer {
+  min-height: 100px;
+  width: 100%;
+}
+
+.agendaContainer input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.agendaContainer .number {
+  border: 1px solid var(--border-color);
+}
+
+/* RELATIONSHIPS */
+
+.relationshipName {
+  border: none;
+  border-right: 1px solid var(--border-color);
+  flex: 1;
+  width: 40px;
+}
+
+.relationshipE,
+.relationshipD,
+.relationshipC,
+.relationshipB,
+.relationshipA,
+.relationshipS {
+  border: none;
+  font-size: small;
+}
+
+.relationshipBorder {
+  border: 2px solid var(--interaction);
+  border-radius: 100px;
 }
 
 /* ACTIVE */
