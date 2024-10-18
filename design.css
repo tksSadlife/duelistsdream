@@ -2356,7 +2356,7 @@ button.sheet-toggle {
 /* TEMPLATE */
 
 .sheet-rolltemplate-attack {
-  background-color: #010A13;;
+  background-color: #091428;;
   border: 1px solid #C89B3C;
   line-height: 1.9em;
 }
@@ -2364,6 +2364,7 @@ button.sheet-toggle {
   background-color: #C89B3C;
   color: #010A13;
   text-align: center;
+  margin-bottom: 4px;
 }
 .sheet-rolltemplate-attackFields {
   display: grid;
@@ -2377,6 +2378,45 @@ button.sheet-toggle {
 .sheet-rolltemplate-attackFields div:nth-child(even)  {
   text-align: left; 
   color: var(--font_color);
+}
+
+.sheet-rolltemplate-dmgDealt {
+  background-color: #091428;
+  border: 1px solid #C89B3C;
+  line-height: 1.9em;
+}
+.sheet-rolltemplate-dmgDealtTitle {
+  background-color: #010A13;
+  border-bottom: 1px solid #C89B3C;
+  color: #C89B3C;
+  text-align: center;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+.sheet-rolltemplate-dmgDealtFields {
+  display: grid;
+  grid-template-columns: 75% 15%;
+  column-gap: 10%;
+}
+.sheet-rolltemplate-dmgDealtFields div:nth-child(odd)  {
+  text-align: right; 
+  color: var(--font_color);
+}
+.sheet-rolltemplate-dmgDealtFields div:nth-child(even)  {
+  text-align: left; 
+  color: var(--font_color);
+}
+
+.sheet-rolltemplate-dmgReceived {
+  background-color: #091428;
+  border: 1px solid #C89B3C;
+  line-height: 1.9em;
+}
+.sheet-rolltemplate-dmgReceivedTitle {
+  background-color: #010A13;
+  color: #C89B3C;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* ACTIVE */

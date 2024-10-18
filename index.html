@@ -3542,9 +3542,23 @@
             </div>
         </div>
         <div class="tab-container active" data-tab="cooking_corner">
-            <input name="attr_cookLife"     type="number"   value="500">
-            <!-- <button type="roll" value="&{template:default} {{name=@{character_name} attacked someone}} {{damage=[[?{How much?|1}]]}}"> Damage someone </button> -->
-            <button name="act_dmgMe" type="action"> Damage me </button> <br /><br />
+            <h6>Armor</h6>
+            <input name="attr_cookArmor"            type="number"   value="25">
+            <h6>Strength</h6>
+            <input name="attr_cookStrength"         type="number"   value="20">
+            <h6>Reflex</h6>
+            <input name="attr_cookReflex"           type="number"   value="20">
+            <h6>Resistance</h6>
+            <input name="attr_cookResistance"       type="number"   value="0">
+            <h6>Weapon Defense</h6>
+            <input name="attr_cookWeaponDefense"    type="number"   value="10">
+            <h6>Magical Armor</h6>
+            <input name="attr_cookMagicalArmor"       type="number"   value="15">
+            <h6>Health</h6>
+            <input name="attr_cookHealth"           type="number"   value="500"> <br /> <br />
+
+            <button name="act_dmgSo"        type="action"> Damage someone </button> <br />
+            <button name="act_dmgMe"        type="action"> Damage me </button> <br /><br />
 
             <button name="act_rollForFun" type="action"> Roll for fun </button>
         </div>
@@ -3740,29 +3754,78 @@
     // ROLL BUTTONS //
     //////////////////
 
-    on("clicked:dmgMe", function(){
-        getAttrs(["cookLife"], function(values) {        
-            startRoll("&{template:default} {{name=@{character_name} got attacked}} {{physical Damage=[[?{How much physical Damage?|0}]]}} {{magical Damage=[[?{How much magical Damage?|0}]]}}",(results) => {
-                const pDmgDealt = results.results["physical Damage"].result;
-                const mDmgDealt = results.results["magical Damage"].result;
+    on("clicked:dmgSo", function() {
+        startRoll("&{template:dmgDealt} {{title=@{character_name} dealt damage!}} {{pDmg=?{Physical Damage|0}}} {{mDmg=?{Magical Damage|0}}} {{eDmg=?{Elemental Damage|0}}} {{tDmg=?{True Damage|0}}}", (results) => {
+            finishRoll(results.rollId);
+        });
+    });
 
-                const newLife = int(values.cookLife) - pDmgDealt - mDmgDealt;
+    on("clicked:dmgMe", function(){
+        getAttrs(["cookHealth", "cookArmor", "cookStrength", "cookReflex", "cookWeaponDefense", "cookMagicalArmor", "cookResistance"], (v) => {
+            startRoll("&{template:dmgReceived} {{title=@{character_name} received damage!}} {{phyDmg=[[?{How much physical Damage did you receive?|0}]]}} {{magDmg=[[?{How much magical Damage did you receive?|0}]]}} {{eleDmg=[[?{How much elemental Damage did you receive?|0}]]}} {{truDmg=[[?{How much true Damage did you receive?|0}]]}} {{defense=[[?{What defense did you choose? 0 for None, 1 for Block, 2 for Dodge|0|1|2}]]}}", (results) => {
+                const phyDmg = results.results.phyDmg.result;
+                const magDmg = results.results.magDmg.result;
+                const eleDmg = results.results.eleDmg.result;
+                const truDmg = results.results.truDmg.result;
+                const defense = results.results.defense.result;
+                
+                const currHealth = int(v["cookHealth"]);
+                const armor = int(v["cookArmor"]);
+                const strength = int(v["cookStrength"]);
+                const reflex = int(v["cookReflex"]);
+                const weaponDefense = int(v["cookWeaponDefense"]);
+                const magArmor = int(v["cookMagicalArmor"]);
+                const resistance = int(v["cookResistance"]);
+
+                const phyDmgReceived = calculatePhyDmgReceived(defense, phyDmg, armor, strength, weaponDefense, reflex);
+                const magDmgReceived = calculateMagDmgReceived(defense, magDmg, magArmor, strength, resistance, reflex);
+                const totalDmgReceived = phyDmgReceived + magDmgReceived + eleDmg + truDmg;
+
+                const newHealth = currHealth - totalDmgReceived;
 
                 setAttrs({
-                    cookLife: newLife
+                    cookHealth: newHealth,
                 });
                 
                 finishRoll(results.rollId);
             });
         });
     });
+
+    const calculatePhyDmgReceived = (defense, phyDmg, armor, strength, weaponDefense, reflex) => {
+        let result = 0;
+
+        if (defense === 0) {
+            result = phyDmg / (1 + armor / 100);
+        } else if (defense === 1) {
+            result = phyDmg / (1 + (strength + armor + weaponDefense) / 100);
+        } else {
+            result = phyDmg / (1 + (reflex + armor) / 100);
+        }
+
+        return int(result);
+    }
+
+    const calculateMagDmgReceived = (defense, magDmg, magArmor, strength, resistance, reflex) => {
+        let result = 0;
+
+        if (defense === 0) {
+            result = magDmg / (1 + magArmor / 100);
+        } else if (defense === 1) {
+            result = magDmg / (1 + (strength * resistance + magArmor) / 100);
+        } else {
+            result = magDmg / (1 + (reflex * resistance + magArmor) / 100);
+        }
+
+        return int(result);
+    }
     
     on("clicked:rollForFun", function(){      
         startRoll("&{template:attack} {{title=Just for fun}} {{roll=[[1d20+6]] }}",(results) => {
             finishRoll(results.rollId);
         });
     });
-    
+
     //////////
     // DATA //
     //////////
@@ -6568,6 +6631,24 @@
             {{#^rollLess() roll 17}}<span style="color: rgb(160, 255, 160)">Success</span>{{/^rollLess() roll 17}}
         </div>
     </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-dmgDealt">
+    <div class="sheet-rolltemplate-dmgDealtTitle">{{title}}</div>
+    <div class="sheet-rolltemplate-dmgDealtFields">
+        <div class="key">Physical Damage:</div>
+        <div class="value">{{pDmg}}</div>
+        <div class="key">Magical Damage:</div>
+        <div class="value">{{mDmg}}</div>
+        <div class="key">Elemental Damage:</div>
+        <div class="value">{{eDmg}}</div>
+        <div class="key">True Damage:</div>
+        <div class="value">{{tDmg}}</div>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-dmgReceived">
+    <div class="sheet-rolltemplate-dmgReceivedTitle">{{title}}</div>
 </rolltemplate>
 
 <!-- 
