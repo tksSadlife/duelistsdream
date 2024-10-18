@@ -2353,6 +2353,32 @@ button.sheet-toggle {
   border-radius: 100px;
 }
 
+/* TEMPLATE */
+
+.sheet-rolltemplate-attack {
+  background-color: #010A13;;
+  border: 1px solid #C89B3C;
+  line-height: 1.9em;
+}
+.sheet-rolltemplate-attackTitle {
+  background-color: #C89B3C;
+  color: #010A13;
+  text-align: center;
+}
+.sheet-rolltemplate-attackFields {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  column-gap: 10%;
+}
+.sheet-rolltemplate-attackFields div:nth-child(odd)  {
+  text-align: right; 
+  color: var(--font_color);
+}
+.sheet-rolltemplate-attackFields div:nth-child(even)  {
+  text-align: left; 
+  color: var(--font_color);
+}
+
 /* ACTIVE */
 
 .active {

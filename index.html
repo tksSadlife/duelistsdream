@@ -65,8 +65,9 @@
         <div class="tab-button" data-tab="core">Core</div>
         <div class="tab-button" data-tab="augments_traits">Augments/Traits</div>
         <div class="tab-button" data-tab="equipment">Equipment</div>
-        <div class="tab-button active" data-tab="abilities">Abilities & Co</div>
+        <div class="tab-button" data-tab="abilities">Abilities & Co</div>
         <div class="tab-button" data-tab="bio_info">Bio & Info</div>
+        <div class="tab-button active" data-tab="cooking">Cooking Corner</div>
     </div>
     <div class="body">
         <div class="tab-container" data-tab="core">
@@ -2819,7 +2820,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-container active" data-tab="abilities">
+        <div class="tab-container" data-tab="abilities">
             <div class="abilities_co_area">
                 <div class="keywords_area start">
                     <div class="justify_content mb">
@@ -3540,6 +3541,13 @@
                 </div>
             </div>
         </div>
+        <div class="tab-container active" data-tab="cooking_corner">
+            <input name="attr_cookLife"     type="number"   value="500">
+            <!-- <button type="roll" value="&{template:default} {{name=@{character_name} attacked someone}} {{damage=[[?{How much?|1}]]}}"> Damage someone </button> -->
+            <button name="act_dmgMe" type="action"> Damage me </button> <br /><br />
+
+            <button name="act_rollForFun" type="action"> Roll for fun </button>
+        </div>
     </div>
 </div>
 
@@ -3728,12 +3736,31 @@
 //        });
 //    });
 
-    //////////
-    // TEST //
-    //////////
+    //////////////////
+    // ROLL BUTTONS //
+    //////////////////
 
-    on('clicked:test', (e) => {
-        regenerate_health();
+    on("clicked:dmgMe", function(){
+        getAttrs(["cookLife"], function(values) {        
+            startRoll("&{template:default} {{name=@{character_name} got attacked}} {{physical Damage=[[?{How much physical Damage?|0}]]}} {{magical Damage=[[?{How much magical Damage?|0}]]}}",(results) => {
+                const pDmgDealt = results.results["physical Damage"].result;
+                const mDmgDealt = results.results["magical Damage"].result;
+
+                const newLife = int(values.cookLife) - pDmgDealt - mDmgDealt;
+
+                setAttrs({
+                    cookLife: newLife
+                });
+                
+                finishRoll(results.rollId);
+            });
+        });
+    });
+    
+    on("clicked:rollForFun", function(){      
+        startRoll("&{template:attack} {{title=Just for fun}} {{roll=[[1d20+6]] }}",(results) => {
+            finishRoll(results.rollId);
+        });
     });
     
     //////////
@@ -6528,7 +6555,20 @@
        {{#rollBetween() roll 2 3}}Failure{{/rollBetween() roll 2 3}}
        {{#rollTotal() roll 1}}Fumble{{/rollTotal() roll 1}}
     </span>
- </rolltemplate>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-attack">
+    <div class="sheet-rolltemplate-attackTitle">{{title}}</div>
+    <div class="sheet-rolltemplate-attackFields">
+        <div class="key">Attack Roll:</div>
+        <div class="value">{{roll}}</div>
+        <div class="key">Result:</div>
+        <div class="value">
+            {{#rollLess() roll 17}}<span style="color: rgb(255, 160, 160)">Failure</span>{{/rollLess() roll 17}}
+            {{#^rollLess() roll 17}}<span style="color: rgb(160, 255, 160)">Success</span>{{/^rollLess() roll 17}}
+        </div>
+    </div>
+</rolltemplate>
 
 <!-- 
     <div>
