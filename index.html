@@ -6520,6 +6520,16 @@
     });
 </script> 
 
+<rolltemplate class="sheet-rolltemplate-d6">
+    <span>{{name}}:</span>
+    <span>{{roll}}=
+       {{#rollTotal() roll 6}}Critical{{/rollTotal() roll 6}}
+       {{#rollBetween() roll 4 5}}Success{{/rollBetween() roll 4 5}}
+       {{#rollBetween() roll 2 3}}Failure{{/rollBetween() roll 2 3}}
+       {{#rollTotal() roll 1}}Fumble{{/rollTotal() roll 1}}
+    </span>
+ </rolltemplate>
+
 <!-- 
     <div>
         <div class="new_tab_buttons">
